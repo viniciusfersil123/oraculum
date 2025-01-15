@@ -1,14 +1,35 @@
-
-
 /* src/App.css */
 
-/* Grid Layout: 4x3 */
+/* Reset default margin and padding */
+html, body, #root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: #f5f5f5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Ensure container fills the entire viewport */
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+  height: 100%;
+  padding-top: 50px;
+  padding-bottom: 50px;
+  box-sizing: border-box;
+}
+
+/* Grid Layout: 4x3 centered horizontally */
 #zodiac-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 20px;
+  gap: 40px 20px;
   justify-items: center;
-  padding: 20px 0;
 }
 
 /* Zodiac Sign Card */
@@ -23,7 +44,8 @@
   width: 150px;
   height: 150px;
   transition: transform 0.3s, box-shadow 0.3s;
-  background-color: #f9f9f9;
+  background-color: #fff;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .zodiac-sign:hover {
@@ -59,4 +81,9 @@ footer p {
   margin-top: 10px;
   font-size: 0.9rem;
   color: #888;
+}
+
+/* Header Alignment */
+header {
+  margin-bottom: 40px;
 }
