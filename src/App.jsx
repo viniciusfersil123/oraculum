@@ -8,8 +8,8 @@ function App() {
     <div className="container">
       {/* Header */}
       <header className="text-center pt-4">
-        <h1>Discover the Truth About Your Zodiac Sign</h1>
-        <h2>Click your sign below to find out more:</h2>
+        <h1>Descubra a Verdade Sobre o Seu Signo do Zodíaco</h1>
+        <h2>Clique no seu signo abaixo para saber mais:</h2>
       </header>
 
       {/* Zodiac Signs Grid */}

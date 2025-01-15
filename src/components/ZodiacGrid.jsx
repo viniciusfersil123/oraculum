@@ -3,9 +3,9 @@ import React from 'react';
 import '../App.css';
 
 const zodiacSigns = [
-  'Aries', 'Taurus', 'Gemini', 'Cancer',
-  'Leo', 'Virgo', 'Libra', 'Scorpio',
-  'Sagittarius', 'Capricorn', 'Aquarius', 'Pisces'
+    'Aries', 'Taurus', 'Gemini', 'Cancer',
+    'Leo', 'Virgo', 'Libra', 'Scorpio',
+    'Sagittarius', 'Capricorn', 'Aquarius', 'Pisces'
 ];
 
 function ZodiacGrid() {
