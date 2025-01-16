@@ -1,14 +1,13 @@
-// src/components/Footer.jsx
 import React from 'react';
 
 function Footer() {
   return (
     <footer className="text-center mt-5">
-      <a href="/privacy">Privacidade</a> |
-      <a href="/terms">Termos</a> |
-      <a href="/contact">Contato</a> |
-      <a href="/disclaimer">Aviso Legal</a>
-      <p>&copy; 2025 Insights Astrológicos. Todos os direitos reservados.</p>
+      <a href="/privacy">Privacy</a> |
+      <a href="/terms">Terms</a> |
+      <a href="/contact">Contact</a> |
+      <a href="/disclaimer">Disclaimer</a>
+      <p>&copy; 2025 Astrology Insights. All rights reserved.</p>
     </footer>
   );
 }

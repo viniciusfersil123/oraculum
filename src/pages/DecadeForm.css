@@ -1,0 +1,73 @@
+
+.decade-container {
+    text-align: center;
+    padding: 40px 20px;
+    background-color: #fff;
+    max-width: 600px;
+    margin: 50px auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  h2 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+    color: #333;
+  }
+  
+  p {
+    font-size: 1.1rem;
+    color: #555;
+  }
+  
+  .decades-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+  }
+  
+  .decade-button {
+    width: 100px;
+    height: 50px;
+    border: 2px solid #555;
+    background-color: #fff;
+    color: #333;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+  }
+  
+  .decade-button:hover {
+    background-color: #ddd;
+    transform: scale(1.1);
+  }
+  
+  .decade-button.selected {
+    background-color: #6a5acd;
+    color: #fff;
+    border-color: #6a5acd;
+  }
+  
+  @media (max-width: 600px) {
+    .decade-button {
+      width: 80px;
+      height: 40px;
+      font-size: 0.9rem;
+    }
+  
+    .decade-container {
+      padding: 20px;
+    }
+  
+    h2 {
+      font-size: 1.5rem;
+    }
+  
+    p {
+      font-size: 1rem;
+    }
+  }
+  
