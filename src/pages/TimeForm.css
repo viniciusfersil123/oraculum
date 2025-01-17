@@ -1,0 +1,52 @@
+/* src/pages/TimeForm.css */
+
+.time-container {
+    text-align: center;
+    font-family: Arial, sans-serif;
+    background-color: #f9f4ed;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    margin: 50px auto;
+  }
+  
+  .time-container h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+  
+  .time-container p {
+    font-size: 14px;
+    margin-bottom: 20px;
+  }
+  
+  .time-selectors {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  
+  .time-selectors select {
+    padding: 8px;
+    font-size: 16px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+  }
+  
+  .continue-button {
+    background-color: #9c27b0;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 25px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .continue-button:hover {
+    background-color: #7b1fa2;
+  }
+  

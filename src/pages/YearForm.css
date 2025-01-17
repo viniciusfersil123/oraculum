@@ -1,0 +1,30 @@
+.year-container {
+    text-align: center;
+}
+
+.year-container h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.year-container p {
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+
+.years-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 10px;
+}
+
+.year-button {
+    padding: 10px;
+    border: none;
+    background-color: #f0f0f0;
+    cursor: pointer;
+}
+
+.year-button.selected {
+    background-color: #ffcc00;
+}

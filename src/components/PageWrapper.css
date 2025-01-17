@@ -1,0 +1,19 @@
+/* src/components/PageWrapper.css */
+h1 {
+    font-size: 1.5em;
+    color: #333;
+  }
+  
+  .page-wrapper {
+    padding: 20px;
+    background-color: #f9f9f9;
+  }
+  
+  .page-wrapper h1 {
+    color: #333;
+  }
+
+.page-wrapper {
+    padding: 20px;
+  }
+

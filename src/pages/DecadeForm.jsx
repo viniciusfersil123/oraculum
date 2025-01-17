@@ -17,8 +17,9 @@ function DecadeForm() {
 
   const handleDecadeClick = (decade) => {
     setSelectedDecade(decade);
-    navigate(`/sign/${signName}/final?day=${day}&decade=${decade}`);
+    navigate(`/sign/${signName}/year?day=${day}&decade=${decade}`);  // ✅ Navigate to YearForm
   };
+
 
   return (
     <div className="decade-container">

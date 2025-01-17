@@ -4,15 +4,17 @@ import { useParams, useSearchParams } from 'react-router-dom';
 function FinalPage() {
   const { signName } = useParams();
   const [searchParams] = useSearchParams();
-  const day = searchParams.get('day');
-  const decade = searchParams.get('decade');
 
   return (
     <div className="final-container">
       <h2>Call Of Destiny</h2>
       <h3>Your Sign: {signName}</h3>
-      <h3>Day of Birth: {day}</h3>
-      <h3>Decade of Birth: {decade}</h3>
+
+      {Array.from(searchParams.entries()).map(([key, value]) => (
+        <h3 key={key}>
+          {key.charAt(0).toUpperCase() + key.slice(1)}: {value}
+        </h3>
+      ))}
     </div>
   );
 }

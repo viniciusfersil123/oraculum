@@ -1,0 +1,59 @@
+/* src/pages/CityForm.css */
+
+.city-container {
+    text-align: center;
+    font-family: Arial, sans-serif;
+    background-color: #f9f4ed;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 320px;
+    margin: 50px auto;
+  }
+  
+  .city-container h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+  
+  .city-container p {
+    font-size: 14px;
+    margin-bottom: 20px;
+  }
+  
+  label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+  
+  input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    margin-bottom: 10px;
+  }
+  
+  .error-text {
+    color: red;
+    font-size: 12px;
+    margin-bottom: 10px;
+  }
+  
+  .continue-button {
+    background-color: #9c27b0;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 25px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .continue-button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+  
