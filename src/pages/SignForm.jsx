@@ -20,7 +20,6 @@ function SignForm() {
 
   return (
     <div className="form-container">
-      <h2>Call Of Destiny</h2>
       <p>Select the <strong><u>day you were born</u></strong></p>
       {mockMonths.map((monthData) => (
         <div key={monthData.month} className="month-section">

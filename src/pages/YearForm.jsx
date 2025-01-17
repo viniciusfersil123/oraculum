@@ -19,7 +19,6 @@ function YearForm() {
 
   return (
     <div className="year-container">
-      <h2>Call Of Destiny</h2>
       <p>Select the <strong><u>year you were born</u></strong></p>
       <div className="years-grid">
         {years.map((year) => (

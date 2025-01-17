@@ -28,7 +28,6 @@ function CityForm() {
 
   return (
     <div className="city-container">
-      <h2>Call Of Destiny</h2>
       <p>
         Enter the <strong><u>place you were born</u></strong> or select the closest bigger city. <br />
         I will use this information to calculate your ascendent and tell you how to thrive in life:

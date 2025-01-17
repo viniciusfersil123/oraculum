@@ -23,7 +23,6 @@ function DecadeForm() {
 
   return (
     <div className="decade-container">
-      <h2>Call Of Destiny</h2>
       <p>Select the <strong><u>decade you were born</u></strong></p>
       <div className="decades-grid">
         {decades.map((decade) => (

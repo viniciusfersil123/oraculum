@@ -1,59 +1,117 @@
-/* src/pages/CityForm.css */
-
+/* Container for the city form */
 .city-container {
-    text-align: center;
-    font-family: Arial, sans-serif;
-    background-color: #f9f4ed;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    width: 320px;
-    margin: 50px auto;
-  }
-  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 30px;
+  border-radius: 10px;
+  width: 100%;
+  max-width: 600px;
+  box-sizing: border-box;
+}
+
+/* Title Styling */
+.city-container h2 {
+  font-size: 2rem;
+  color: #511907;
+  margin-bottom: 10px;
+}
+
+/* Subtitle Styling */
+.city-container p {
+  font-size: 1.1rem;
+  color: #444;
+  margin-bottom: 20px;
+  line-height: 1.5;
+}
+
+/* Input Label */
+.city-container label {
+  font-size: 1rem;
+  font-weight: bold;
+  color: #444;
+  margin-bottom: 10px;
+}
+
+/* Input Field Styling */
+#city-input {
+  width: 100%;
+  max-width: 400px;
+  padding: 10px;
+  font-size: 1rem;
+  border: 2px solid #cda653;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+#city-input:focus {
+  border-color: #9c27b0;
+  outline: none;
+  box-shadow: 0 4px 10px rgba(156, 39, 176, 0.3);
+}
+
+/* Error Text */
+.error-text {
+  color: red;
+  font-size: 0.85rem;
+  margin-top: 5px;
+}
+
+/* Continue Button Styling */
+.continue-button {
+  width: 150px;
+  padding: 10px 20px;
+  margin-top: 20px;
+  background-color: #fff;
+  border: 2px solid #cda653;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: bold;
+  color: #444;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: transform 0.2s, background-color 0.2s, box-shadow 0.2s;
+}
+
+.continue-button:hover:not(:disabled) {
+  transform: scale(1.1);
+  background-color: #fff;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.continue-button:active {
+  background-color: #9c27b0;
+  color: #fff;
+  border-color: #7b1fa2;
+  box-shadow: 0 4px 10px rgba(156, 39, 176, 0.5);
+}
+
+.continue-button:disabled {
+  background-color: #ccc;
+  color: #888;
+  border-color: #ccc;
+  cursor: not-allowed;
+}
+
+/* Responsive Design */
+@media only screen and (max-width: 600px) {
   .city-container h2 {
-    font-size: 24px;
-    margin-bottom: 10px;
+    font-size: 1.6rem;
   }
-  
+
   .city-container p {
-    font-size: 14px;
-    margin-bottom: 20px;
+    font-size: 1rem;
   }
-  
-  label {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: bold;
-  }
-  
-  input[type="text"] {
+
+  #city-input {
     width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    margin-bottom: 10px;
   }
-  
-  .error-text {
-    color: red;
-    font-size: 12px;
-    margin-bottom: 10px;
-  }
-  
+
   .continue-button {
-    background-color: #9c27b0;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 25px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background-color 0.3s;
+    width: 130px;
+    font-size: 0.9rem;
+    padding: 8px 16px;
   }
-  
-  .continue-button:disabled {
-    background-color: #ccc;
-    cursor: not-allowed;
-  }
-  
+}

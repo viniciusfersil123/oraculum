@@ -1,89 +1,192 @@
-/* src/App.css */
-
 /* Reset default margin and padding */
 html, body, #root {
   height: 100%;
   margin: 0;
   padding: 0;
   background-color: #f5f5f5;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-/* Ensure container fills the entire viewport */
-.container {
+  font-family: 'Open Sans', Arial, sans-serif;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
   text-align: center;
+}
+
+/* Full-page container */
+.container {
   width: 100%;
+  max-width: 1200px;
   height: 100%;
-  padding-top: 50px;
-  padding-bottom: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
   box-sizing: border-box;
 }
 
-/* Grid Layout: 4x3 centered horizontally */
+/* Fixed 4x3 Zodiac Grid Layout */
 #zodiac-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 40px 20px;
-  justify-items: center;
+  grid-template-columns: repeat(4, 1fr); /* Always 4 columns */
+  grid-template-rows: repeat(3, auto);  /* Always 3 rows */
+  gap: 20px;
+  width: 100%;
+  max-width: 800px;
+  margin-top: 20px;
+  padding: 0 10px;
+  box-sizing: border-box;
 }
 
 /* Zodiac Sign Card */
 .zodiac-sign {
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
-  border: 1px solid #ccc;
+  align-items: center;
+  flex-direction: column;
+  background-color: #fff;
+  border: 2px solid #cda653;
   border-radius: 10px;
   padding: 10px;
-  width: 150px;
-  height: 150px;
-  transition: transform 0.3s, box-shadow 0.3s;
-  background-color: #fff;
+  width: 100%;
+  height: 130px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s, background-color 0.3s;
+  text-align: center;
+}
+
+.zodiac-sign a {
+  text-decoration: none;
+  color: inherit;
 }
 
 .zodiac-sign:hover {
-  transform: scale(1.1);
+  transform: scale(1.05);
+  background-color: #fff;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
 
 .zodiac-sign img {
-  width: 80px;
-  height: 80px;
+  width: 60px;
+  height: 60px;
   object-fit: contain;
 }
 
 .zodiac-sign p {
-  margin-top: 10px;
+  margin-top: 8px;
+  font-size: 1rem;
   font-weight: bold;
-  text-align: center;
   color: #444;
 }
 
-/* Footer Links */
-footer a {
-  margin: 0 10px;
-  color: #555;
-  text-decoration: none;
+/* Header Styling */
+header {
+  width: 100%;
+  margin-top: 20px;
 }
 
-footer a:hover {
+header h1, header h2 {
+  color: #511907;
+  margin: 10px 0;
+}
+
+header h1 {
+  font-size: 2.2rem;
+  font-weight: bold;
+}
+
+header h2 {
+  font-size: 1.6rem;
+}
+
+/* Footer Styling */
+footer {
+  width: 100%;
+  padding: 10px 0;
+  background-color: transparent;
+}
+
+.footer-link {
+  margin: 0 10px;
+  color: #a9aaac;
+  text-decoration: none;
+  font-size: 0.85rem;
+}
+
+.footer-link:hover {
   text-decoration: underline;
 }
 
 footer p {
-  margin-top: 10px;
-  font-size: 0.9rem;
-  color: #888;
+  color: #a9aaac;
+  font-size: 0.8rem;
 }
 
-/* Header Alignment */
-header {
-  margin-bottom: 40px;
+/* Button Styling */
+button {
+  padding: 10px 20px;
+  background-color: #9c27b0;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button:hover:not(:disabled) {
+  background-color: #7b1fa2;
+}
+
+button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+/* Input Fields */
+input[type="text"], select {
+  width: 100%;
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+  margin-bottom: 10px;
+}
+
+/* Error Message */
+.error-text {
+  color: red;
+  font-size: 0.75rem;
+  margin-top: 4px;
+}
+
+/* Responsive Design - Keep 4x3 grid on all screens */
+@media only screen and (max-width: 600px) {
+  #zodiac-grid {
+    grid-template-columns: repeat(4, 1fr);  /* Keep 4 columns */
+    grid-template-rows: repeat(3, auto);    /* Keep 3 rows */
+  }
+
+  header h1 {
+    font-size: 1.6rem;
+  }
+
+  header h2 {
+    font-size: 1.2rem;
+  }
+
+  .zodiac-sign {
+    height: 100px;
+  }
+
+  .zodiac-sign img {
+    width: 50px;
+    height: 50px;
+  }
+
+  button {
+    font-size: 0.9rem;
+    padding: 8px 16px;
+  }
 }

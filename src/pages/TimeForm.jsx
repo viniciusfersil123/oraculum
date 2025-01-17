@@ -24,7 +24,6 @@ function TimeForm() {
 
     return (
         <div className="time-container">
-            <h2>Call Of Destiny</h2>
             <p>
                 Pick the <strong><u>time you were born</u></strong> to see your chances of getting rich <br />
                 <em>(An estimate will work)</em>

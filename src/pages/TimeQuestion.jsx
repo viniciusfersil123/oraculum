@@ -1,6 +1,7 @@
 // src/pages/DayQuestion.jsx
 import React from "react";
 import { useNavigate, useParams, useSearchParams } from "react-router-dom";
+import "./TimeQuestion.css";
 
 function DayQuestion() {
   const navigate = useNavigate();

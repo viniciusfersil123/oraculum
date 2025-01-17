@@ -1,91 +1,101 @@
+/* Container for the form */
+.form-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 30px;
+  border-radius: 10px;
+  width: 100%;
+  max-width: 800px;
 
-body {
-    font-family: 'Arial', sans-serif;
-    background-color: #f4f4f9;
-    margin: 0;
-    padding: 0;
-  }
-  
-  .form-container {
-    text-align: center;
-    padding: 40px 20px;
-    background-color: #fff;
-    max-width: 600px;
-    margin: 50px auto;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
-  
-  h2 {
-    font-size: 2rem;
-    margin-bottom: 10px;
-    color: #333;
-  }
-  
-  p {
-    font-size: 1.1rem;
-    color: #555;
-  }
-  
-  .month-section {
-    margin-top: 30px;
-  }
-  
-  .month-section h3 {
-    background-color: #333;
-    color: #fff;
-    padding: 10px;
-    border-radius: 8px;
-  }
-  
+  box-sizing: border-box;
+}
+
+/* Title and Subtitle Styling */
+.form-container h2 {
+  font-size: 2rem;
+  color: #511907;
+  margin-bottom: 10px;
+}
+
+.form-container p {
+  font-size: 1.1rem;
+  color: #444;
+  margin-bottom: 20px;
+}
+
+/* Month Section */
+.month-section {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.month-section h3 {
+  font-size: 1.2rem;
+  color: #9c27b0;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* Grid Layout for Days */
+.days-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr); /* 7 columns for days of the week */
+  gap: 10px;
+  justify-items: center;
+  width: 100%;
+}
+
+/* Day Button Styling */
+.day-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff;
+  border: 2px solid #cda653;
+  border-radius: 8px;
+  width: 45px;
+  height: 45px;
+  font-size: 1rem;
+  font-weight: bold;
+  color: #444;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s, background-color 0.2s, box-shadow 0.2s;
+  cursor: pointer;
+}
+
+.day-button:hover {
+  transform: scale(1.1);
+  background-color: #fff;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.day-button.selected {
+  background-color: #9c27b0;
+  color: #fff;
+  border-color: #7b1fa2;
+  box-shadow: 0 4px 10px rgba(156, 39, 176, 0.5);
+}
+
+/* Responsive Design */
+@media only screen and (max-width: 600px) {
   .days-grid {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 10px;
-    margin-top: 10px;
+    grid-template-columns: repeat(5, 1fr); /* Adjust grid for smaller screens */
   }
-  
+
   .day-button {
-    width: 50px;
-    height: 50px;
-    border: 2px solid #555;
-    background-color: #fff;
-    color: #333;
-    border-radius: 8px;
+    width: 40px;
+    height: 40px;
+    font-size: 0.9rem;
+  }
+
+  .form-container h2 {
+    font-size: 1.6rem;
+  }
+
+  .form-container p {
     font-size: 1rem;
-    cursor: pointer;
-    transition: background-color 0.3s, transform 0.2s;
   }
-  
-  .day-button:hover {
-    background-color: #ddd;
-    transform: scale(1.1);
-  }
-  
-  .day-button.selected {
-    background-color: #6a5acd;
-    color: #fff;
-    border-color: #6a5acd;
-  }
-  
-  @media (max-width: 600px) {
-    .day-button {
-      width: 40px;
-      height: 40px;
-      font-size: 0.9rem;
-    }
-  
-    .form-container {
-      padding: 20px;
-    }
-  
-    h2 {
-      font-size: 1.5rem;
-    }
-  
-    p {
-      font-size: 1rem;
-    }
-  }
-  
+}
