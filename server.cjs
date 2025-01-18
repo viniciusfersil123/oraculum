@@ -9,7 +9,7 @@ const PORT = 5000;
 app.use(cors());
 app.use(express.json());
 
-// Root Route
+// Root Route to Confirm Server is Running
 app.get('/', (req, res) => {
   res.send('🚀 Astrology API Server is Running with v2!');
 });
@@ -23,9 +23,8 @@ app.get('/api/token', async (req, res) => {
         client_id: process.env.CLIENT_ID,
         client_secret: process.env.CLIENT_SECRET
       }), {
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
-      }
-    );
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+    });
 
     res.json(response.data);
   } catch (err) {
@@ -36,10 +35,10 @@ app.get('/api/token', async (req, res) => {
 
 // Fetch Horoscope (v2)
 app.get('/api/horoscope', async (req, res) => {
-  const { sign } = req.query;
+  const { sign, datetime } = req.query;
 
-  if (!sign) {
-    return res.status(400).json({ error: 'Zodiac sign is required.' });
+  if (!sign || !datetime) {
+    return res.status(400).json({ error: 'Zodiac sign and datetime are required.' });
   }
 
   try {
@@ -49,31 +48,35 @@ app.get('/api/horoscope', async (req, res) => {
         client_id: process.env.CLIENT_ID,
         client_secret: process.env.CLIENT_SECRET
       }), {
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
-      }
-    );
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+    });
 
     const accessToken = tokenResponse.data.access_token;
 
-    const horoscopeResponse = await axios.get(`https://api.prokerala.com/v2/astrology/daily-horoscope`, {
+    // Fetch horoscope data
+    const horoscopeResponse = await axios.get('https://api.prokerala.com/v2/horoscope/daily', {
       headers: { Authorization: `Bearer ${accessToken}` },
-      params: { sign: sign }
+      params: {
+        sign: sign,
+        datetime: datetime // Make sure this datetime is in the correct format
+      }
     });
 
     res.json(horoscopeResponse.data);
-
   } catch (err) {
     console.error('Error fetching horoscope:', err.response?.data || err.message);
     res.status(500).json({ error: 'Failed to fetch horoscope data.' });
   }
 });
 
-// Fetch Kundli (v2)
-app.get('/api/kundli', async (req, res) => {
-  const { lat, lon, datetime } = req.query;
+// Fetch Daily Prediction (v2)
+// Update the API endpoint if needed
 
-  if (!lat || !lon || !datetime) {
-    return res.status(400).json({ error: 'Latitude, longitude, and datetime are required.' });
+app.get('/api/planet-position', async (req, res) => {
+  const { lat, lon, datetime, planets, ayanamsa, coordinates } = req.query;
+
+  if (!lat || !lon || !datetime || !planets || !ayanamsa || !coordinates) {
+    return res.status(400).json({ error: 'Missing required parameters.' });
   }
 
   try {
@@ -89,23 +92,27 @@ app.get('/api/kundli', async (req, res) => {
 
     const accessToken = tokenResponse.data.access_token;
 
-    const kundliResponse = await axios.get(`https://api.prokerala.com/v2/astrology/kundli`, {
+    const planetPositionResponse = await axios.get('https://api.prokerala.com/v2/astrology/planet-position', {
       headers: { Authorization: `Bearer ${accessToken}` },
       params: {
-        ayanamsa: 1,
-        coordinates: `${lat},${lon}`,
-        datetime: datetime // Do not encode this string
+        lat,
+        lon,
+        datetime,
+        planets,
+        ayanamsa,
+        coordinates
       }
     });
 
-    res.json(kundliResponse.data);
-
+    res.json(planetPositionResponse.data);
   } catch (err) {
-    console.error('Error fetching Kundli:', err.response?.data || err.message);
-    res.status(500).json({ error: 'Failed to fetch Kundli data.' });
+    console.error('Error fetching planet position:', err.response?.data || err.message);
+    res.status(500).json({ error: 'Failed to fetch planet position data.' });
   }
 });
 
+
+// Listen on port
 app.listen(PORT, () => {
   console.log(`🚀 Server running at http://localhost:${PORT}`);
 });
