@@ -10,10 +10,10 @@ function DecadeForm() {
   const [selectedDecade, setSelectedDecade] = useState(null);
 
   const decades = [
-    '1900s', '1910s', '1920s', '1930s',
     '1940s', '1950s', '1960s', '1970s',
-    '1980s', '1990s', '2000s', '2010s'
+    '1980s', '1990s', '2000s', '2010s', '2020s'
   ];
+
 
   const handleDecadeClick = (decade) => {
     setSelectedDecade(decade);

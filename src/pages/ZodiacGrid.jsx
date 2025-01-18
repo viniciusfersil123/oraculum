@@ -11,13 +11,14 @@ function ZodiacGrid() {
   return (
     <section id="zodiac-grid" className="grid">
       {zodiacSigns.map((sign) => (
-        <div key={sign} className="zodiac-sign">
-          {/* Corrected URL to include '/day' */}
-          <a href={`/sign/${sign.toLowerCase()}/day`}>
-            <img src={`/assets/${sign.toLowerCase()}.png`} alt={sign} />
-            <p>{sign}</p>
-          </a>
-        </div>
+        <a 
+          key={sign} 
+          href={`/sign/${sign.toLowerCase()}/day`} 
+          className="zodiac-sign"
+        >
+          <img src={`/assets/${sign.toLowerCase()}.png`} alt={sign} />
+          <p>{sign}</p>
+        </a>
       ))}
     </section>
   );

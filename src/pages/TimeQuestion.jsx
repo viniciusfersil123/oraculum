@@ -17,7 +17,7 @@ function DayQuestion() {
   };
 
   const handleNo = () => {
-    navigate(`/sign/${signName}/final?day=${day}&decade=${decade}&year=${year}`);
+    navigate(`/sign/${signName}/city?day=${day}&decade=${decade}&year=${year}`);
   };
 
   return (
