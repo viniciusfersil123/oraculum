@@ -1,16 +1,20 @@
 const express = require('express');
 const axios = require('axios');
 const cors = require('cors');
+const path = require('path');
 require('dotenv').config();
 
 const app = express();
-const PORT = 5000;
+const PORT = process.env.PORT || 5000;
 
 app.use(cors());
 app.use(express.json());
 
+// Serve the React frontend
+app.use(express.static(path.join(__dirname, 'dist')));
+
 // Root Route to Confirm Server is Running
-app.get('/', (req, res) => {
+app.get('/api', (req, res) => {
   res.send('🚀 Astrology API Server is Running with v2!');
 });
 
@@ -53,12 +57,11 @@ app.get('/api/horoscope', async (req, res) => {
 
     const accessToken = tokenResponse.data.access_token;
 
-    // Fetch horoscope data
     const horoscopeResponse = await axios.get('https://api.prokerala.com/v2/horoscope/daily', {
       headers: { Authorization: `Bearer ${accessToken}` },
       params: {
-        sign: sign,
-        datetime: datetime // Make sure this datetime is in the correct format
+        sign,
+        datetime
       }
     });
 
@@ -78,21 +81,19 @@ app.get('/api/cities', async (req, res) => {
   }
 
   try {
-    // First fetch country GeonameId
     const countryResponse = await axios.get('http://api.geonames.org/countryInfoJSON', {
       params: {
         username: process.env.GEONAMES_USERNAME,
       }
     });
 
-    const country = countryResponse.data.geonames.find(country => country.countryCode === countryCode);
+    const country = countryResponse.data.geonames.find(c => c.countryCode === countryCode);
     const countryGeonameId = country ? country.geonameId : null;
 
     if (!countryGeonameId) {
       return res.status(400).json({ error: 'Invalid country code' });
     }
 
-    // Now fetch states based on the countryId
     const statesResponse = await axios.get('http://api.geonames.org/childrenJSON', {
       params: {
         geonameId: countryGeonameId,
@@ -100,10 +101,9 @@ app.get('/api/cities', async (req, res) => {
       }
     });
 
-    const state = statesResponse.data.geonames.find(state => state.geonameId === stateCode);
+    const state = statesResponse.data.geonames.find(s => s.geonameId === stateCode);
 
     if (state) {
-      // If state exists, fetch cities under the state
       const citiesResponse = await axios.get('http://api.geonames.org/searchJSON', {
         params: {
           parentId: state.geonameId,
@@ -120,7 +120,6 @@ app.get('/api/cities', async (req, res) => {
     res.status(500).json({ error: 'Failed to fetch cities data.' });
   }
 });
-
 
 // Fetch Planet Position (v2)
 app.get('/api/planet-position', async (req, res) => {
@@ -161,7 +160,12 @@ app.get('/api/planet-position', async (req, res) => {
   }
 });
 
-// Listen on port
+// Fallback to serve React frontend
+app.get('*', (req, res) => {
+  res.sendFile(path.resolve(__dirname, 'dist', 'index.html'));
+});
+
+// Start the server
 app.listen(PORT, () => {
   console.log(`🚀 Server running at http://localhost:${PORT}`);
 });
