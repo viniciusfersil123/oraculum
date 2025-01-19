@@ -9,15 +9,16 @@ function DayQuestion() {
   const [searchParams] = useSearchParams();
 
   const day = searchParams.get("day");
+  const month = searchParams.get("month");
   const decade = searchParams.get("decade");
   const year = searchParams.get("year");
 
   const handleYes = () => {
-    navigate(`/sign/${signName}/hour?day=${day}&decade=${decade}&year=${year}`);
+    navigate(`/sign/${signName}/hour?day=${day}&month=${month}&decade=${decade}&year=${year}`);
   };
 
   const handleNo = () => {
-    navigate(`/sign/${signName}/city?day=${day}&decade=${decade}&year=${year}`);
+    navigate(`/sign/${signName}/city?day=${day}&month=${month}&decade=${decade}&year=${year}`);
   };
 
   return (

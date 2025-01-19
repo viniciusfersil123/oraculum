@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useSearchParams, useNavigate } from 'react-router-dom';
+import './FinalPage.css';
 
 function FinalPage() {
   const { signName } = useParams();
@@ -10,20 +11,38 @@ function FinalPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  // Retrieve parameters from the URL or set mock values
-  const day = searchParams.get('day') || '26';   // Mock Day if not available
-  const decade = searchParams.get('decade') || '1950s';   // Mock Decade if not available
-  const year = searchParams.get('year') || '1955';   // Mock Year if not available
+  // Month names array
+  const monthNames = [
+    'January', 'February', 'March', 'April', 'May', 'June',
+    'July', 'August', 'September', 'October', 'November', 'December'
+  ];
+
+  // Retrieve parameters from the URL
+  const day = searchParams.get('day') || '26';
+  const year = searchParams.get('year') || '1955';
+  const month = monthNames[parseInt(searchParams.get('month') || '3', 10) - 1]; // Map month number to name
+
+  // Handle hour, minute, and period - treat "null" as invalid
+  const hour = searchParams.get('hour') !== 'null' ? searchParams.get('hour') : null;
+  const minute = searchParams.get('minute') !== 'null' ? searchParams.get('minute') : null;
+  const period = searchParams.get('period') !== 'null' ? searchParams.get('period') : null;
+
   const city = searchParams.get('city') || 'Unknown';
   const state = searchParams.get('state') || 'Unknown';
   const country = searchParams.get('country') || 'Unknown';
+
+  // Format time if valid
+  const formattedTime =
+    hour && minute && period
+      ? `${hour.padStart(2, '0')}:${minute.padStart(2, '0')} ${period}`
+      : 'Unknown';
 
   useEffect(() => {
     const fetchAstroData = async () => {
       try {
         setLoading(true);
 
-        // Simulate API call for daily prediction (replace with actual backend call if available)
+        // Simulate API call for daily prediction
         const mockPrediction = {
           prediction: `You will have an insightful day, ${signName}!`
         };
@@ -44,8 +63,6 @@ function FinalPage() {
 
   return (
     <div className="final-container">
-      <h2>Call Of Destiny</h2>
-
       {/* Display YouTube Video */}
       <div className="youtube-video">
         <iframe
@@ -61,12 +78,11 @@ function FinalPage() {
 
       {/* Displaying the URL parameters */}
       <h3>Your Sign: {signName}</h3>
-      <h3>Day: {day}</h3>
-      <h3>Decade: {decade}</h3>
-      <h3>Year: {year}</h3>
-      <h3>City: {city}</h3>
-      <h3>State: {state}</h3>
-      <h3>Country: {country}</h3>
+      <h3>Date of Birth: {day} {month}, {year}</h3> {/* Month as a name */}
+      <h3>Time of Birth: {formattedTime}</h3> {/* Show time or 'Unknown' */}
+      <h3>City: {decodeURIComponent(city)}</h3>
+      <h3>State: {decodeURIComponent(state)}</h3>
+      <h3>Country: {decodeURIComponent(country)}</h3>
 
       {loading && <p>Loading your astrology insights...</p>}
       {error && <p>{error}</p>}

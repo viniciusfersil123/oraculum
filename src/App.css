@@ -252,3 +252,56 @@ select {
 .error-text {
   color: #ff0000;
 }
+
+/* Mobile Styling for Zodiac Grid */
+@media only screen and (max-width: 600px) {
+  #zodiac-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    /* 2 columns for better spacing */
+    gap: 15px;
+    padding: 20px;
+    width: 100%;
+    justify-content: center;
+  }
+
+  .zodiac-sign {
+    height: auto;
+    padding: 15px;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s ease-in-out;
+  }
+
+  .zodiac-sign img {
+    width: 70px;
+    height: 70px;
+    margin-bottom: 10px;
+  }
+
+  .zodiac-sign:hover {
+    transform: scale(1.1);
+  }
+
+  .zodiac-sign p {
+    font-size: 0.9rem;
+    text-align: center;
+  }
+
+  header h1,
+  header h2 {
+    font-size: 1.2rem;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  footer {
+    margin-top: 20px;
+    padding: 10px;
+    font-size: 0.8rem;
+  }
+}

@@ -12,6 +12,7 @@ function CityForm() {
   const day = searchParams.get("day");
   const decade = searchParams.get("decade");
   const year = searchParams.get("year");
+  const month = searchParams.get("month");
   const hour = searchParams.get("hour");
   const minute = searchParams.get("minute");
   const period = searchParams.get("period");
@@ -105,7 +106,7 @@ function CityForm() {
     }
 
     navigate(
-      `/sign/${signName}/final?day=${day}&decade=${decade}&year=${year}&hour=${hour}&minute=${minute}&period=${period}&city=${selectedCity.label}&state=${selectedState.label}&country=${selectedCountry.label}`
+      `/sign/${signName}/final?day=${day}&month=${month}&decade=${decade}&year=${year}&hour=${hour}&minute=${minute}&period=${period}&city=${selectedCity.label}&state=${selectedState.label}&country=${selectedCountry.label}`
     );
   };
 
