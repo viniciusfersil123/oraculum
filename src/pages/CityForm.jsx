@@ -30,27 +30,6 @@ function CityForm() {
   // Fetch countries
   useEffect(() => {
     axios
-      .get(`http://api.geonames.org/countryInfoJSON?username=${GEO_USERNAME}`)
-      .then((response) => {
-        const countries = response.data.geonames.map((country) => ({
-          value: country.countryCode,
-          label: country.countryName,
-          geonameId: country.geonameId,
-        }));
-        setCountryOptions(countries);
-      })
-      .catch((err) => console.error("Failed to fetch countries:", err));
-  }, []);
-
-  const handleCountryChange = (country) => {
-    setSelectedCountry(country);
-    setSelectedState(null);
-    setSelectedCity(null);
-    setCityOptions([]);
-    fetchStates(country.geonameId);
-    console.log("Selected Country:", country.label);
-  }; useEffect(() => {
-    axios
       .get(`https://secure.geonames.org/countryInfoJSON?username=${GEO_USERNAME}`)
       .then((response) => {
         const countries = response.data.geonames.map((country) => ({
@@ -61,7 +40,29 @@ function CityForm() {
         setCountryOptions(countries);
       })
       .catch((err) => console.error("Failed to fetch countries:", err));
-  }, []);
+  }, [GEO_USERNAME]);
+
+  const handleCountryChange = (country) => {
+    setSelectedCountry(country);
+    setSelectedState(null);
+    setSelectedCity(null);
+    setCityOptions([]);
+    fetchStates(country.geonameId);
+    console.log("Selected Country:", country.label);
+  };
+
+  const handleStateChange = (state) => {
+    setSelectedState(state);
+    setSelectedCity(null);
+    setCityOptions([]);
+    fetchCities(selectedCountry?.value, state?.value);
+    console.log("Selected State:", state.label);
+  };
+
+  const handleCityChange = (city) => {
+    setSelectedCity(city);
+    console.log("Selected City:", city.label);
+  };
 
   const fetchStates = (countryId) => {
     if (!countryId) return;

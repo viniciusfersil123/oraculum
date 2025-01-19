@@ -21,11 +21,9 @@ function FinalPage() {
   const day = searchParams.get('day') || '26';
   const year = searchParams.get('year') || '1955';
   const month = monthNames[parseInt(searchParams.get('month') || '3', 10) - 1]; // Map month number to name
-
-  // Handle hour, minute, and period - treat "null" as invalid
-  const hour = searchParams.get('hour') !== 'null' ? searchParams.get('hour') : null;
-  const minute = searchParams.get('minute') !== 'null' ? searchParams.get('minute') : null;
-  const period = searchParams.get('period') !== 'null' ? searchParams.get('period') : null;
+  const hour = searchParams.get('hour');
+  const minute = searchParams.get('minute');
+  const period = searchParams.get('period');
 
   const city = searchParams.get('city') || 'Unknown';
   const state = searchParams.get('state') || 'Unknown';
@@ -79,7 +77,11 @@ function FinalPage() {
       {/* Displaying the URL parameters */}
       <h3>Your Sign: {signName}</h3>
       <h3>Date of Birth: {day} {month}, {year}</h3> {/* Month as a name */}
-      <h3>Time of Birth: {formattedTime}</h3> {/* Show time or 'Unknown' */}
+      {hour && minute && period ? (
+        <h3>Time of Birth: {formattedTime}</h3> /* Display time only if valid */
+      ) : (
+        <h3>Time of Birth: Unknown</h3> /* Default to Unknown */
+      )}
       <h3>City: {decodeURIComponent(city)}</h3>
       <h3>State: {decodeURIComponent(state)}</h3>
       <h3>Country: {decodeURIComponent(country)}</h3>
