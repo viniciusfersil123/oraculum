@@ -26,15 +26,15 @@ function CityForm() {
 
   const GEO_USERNAME = import.meta.env.VITE_GEONAMES_USERNAME;
 
-  // Fetch country information
+  // Fetch countries
   useEffect(() => {
     axios
       .get(`http://api.geonames.org/countryInfoJSON?username=${GEO_USERNAME}`)
       .then((response) => {
         const countries = response.data.geonames.map((country) => ({
-          value: country.countryCode, // Use ISO country code
+          value: country.countryCode,
           label: country.countryName,
-          geonameId: country.geonameId, // Keep geonameId for fetching states
+          geonameId: country.geonameId,
         }));
         setCountryOptions(countries);
       })
@@ -45,19 +45,22 @@ function CityForm() {
     setSelectedCountry(country);
     setSelectedState(null);
     setSelectedCity(null);
-    setCityOptions([]); // Clear previous city options
-    fetchStates(country.geonameId); // Pass geonameId to fetch states
+    setCityOptions([]);
+    fetchStates(country.geonameId);
+    console.log("Selected Country:", country.label);
   };
 
   const handleStateChange = (state) => {
     setSelectedState(state);
     setSelectedCity(null);
-    setCityOptions([]); // Clear previous city options
-    fetchCities(selectedCountry?.value, state?.value); // Use ISO country code and adminCode1
+    setCityOptions([]);
+    fetchCities(selectedCountry?.value, state?.value);
+    console.log("Selected State:", state.label);
   };
 
   const handleCityChange = (city) => {
     setSelectedCity(city);
+    console.log("Selected City:", city.label);
   };
 
   const fetchStates = (countryId) => {
@@ -67,8 +70,9 @@ function CityForm() {
       .get(`http://api.geonames.org/childrenJSON?geonameId=${countryId}&username=${GEO_USERNAME}`)
       .then((response) => {
         const states = response.data.geonames.map((state) => ({
-          value: state.adminCode1, // Use adminCode1 for state code
+          value: state.adminCode1,
           label: state.name,
+          geonameId: state.geonameId,
         }));
         setStateOptions(states);
       })
@@ -76,21 +80,17 @@ function CityForm() {
   };
 
   const fetchCities = (countryCode, stateCode) => {
-    if (!countryCode || !stateCode) {
-      console.warn("Invalid countryCode or stateCode:", { countryCode, stateCode });
-      return;
-    }
-
-    const url = `http://api.geonames.org/searchJSON?country=${countryCode}&adminCode1=${stateCode}&featureClass=P&maxRows=10&username=${GEO_USERNAME}`;
-    console.log("Fetching cities with URL:", url); // Debugging URL
+    if (!countryCode || !stateCode) return;
 
     axios
-      .get(url)
+      .get(
+        `http://api.geonames.org/searchJSON?country=${countryCode}&adminCode1=${stateCode}&featureClass=P&maxRows=10&username=${GEO_USERNAME}`
+      )
       .then((response) => {
-        console.log("Cities response:", response.data); // Debugging response
         const cities = response.data.geonames.map((city) => ({
           value: city.geonameId,
           label: city.name,
+          geonameId: city.geonameId,
         }));
         setCityOptions(cities);
       })
@@ -100,19 +100,19 @@ function CityForm() {
   const handleContinue = () => {
     if (!selectedCountry || !selectedState || !selectedCity) {
       setError("Please select a country, state, and city.");
+      console.error("Error: Incomplete selection.");
       return;
     }
 
     navigate(
-      `/sign/${signName}/final?day=${day}&decade=${decade}&year=${year}&hour=${hour}&minute=${minute}&period=${period}&city=${selectedCity.label}&stateId=${selectedState.value}&countryId=${selectedCountry.value}`
+      `/sign/${signName}/final?day=${day}&decade=${decade}&year=${year}&hour=${hour}&minute=${minute}&period=${period}&city=${selectedCity.label}&state=${selectedState.label}&country=${selectedCountry.label}`
     );
   };
 
   return (
     <div className="city-container">
       <p>
-        Enter the <strong><u>place you were born</u></strong> or select the closest bigger city. <br />
-        I will use this information to calculate your ascendent and tell you how to thrive in life:
+        Enter the <strong><u>place you were born</u></strong> or select the closest bigger city.
       </p>
 
       <label htmlFor="country-select">Country</label>
