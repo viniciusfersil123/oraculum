@@ -28,7 +28,6 @@ function FinalPage() {
           prediction: `You will have an insightful day, ${signName}!`
         };
         setDailyPrediction(mockPrediction);
-
       } catch (err) {
         setError("Failed to fetch astrology data.");
       } finally {
@@ -46,6 +45,19 @@ function FinalPage() {
   return (
     <div className="final-container">
       <h2>Call Of Destiny</h2>
+
+      {/* Display YouTube Video */}
+      <div className="youtube-video">
+        <iframe
+          width="560"
+          height="315"
+          src="https://www.youtube.com/embed/USMohM34iMM?controls=0&modestbranding=1&showinfo=0"
+          title="YouTube video player"
+          frameBorder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowFullScreen
+        ></iframe>
+      </div>
 
       {/* Displaying the URL parameters */}
       <h3>Your Sign: {signName}</h3>
