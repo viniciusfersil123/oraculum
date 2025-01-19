@@ -49,26 +49,25 @@ function CityForm() {
     setCityOptions([]);
     fetchStates(country.geonameId);
     console.log("Selected Country:", country.label);
-  };
-
-  const handleStateChange = (state) => {
-    setSelectedState(state);
-    setSelectedCity(null);
-    setCityOptions([]);
-    fetchCities(selectedCountry?.value, state?.value);
-    console.log("Selected State:", state.label);
-  };
-
-  const handleCityChange = (city) => {
-    setSelectedCity(city);
-    console.log("Selected City:", city.label);
-  };
+  }; useEffect(() => {
+    axios
+      .get(`https://secure.geonames.org/countryInfoJSON?username=${GEO_USERNAME}`)
+      .then((response) => {
+        const countries = response.data.geonames.map((country) => ({
+          value: country.countryCode,
+          label: country.countryName,
+          geonameId: country.geonameId,
+        }));
+        setCountryOptions(countries);
+      })
+      .catch((err) => console.error("Failed to fetch countries:", err));
+  }, []);
 
   const fetchStates = (countryId) => {
     if (!countryId) return;
 
     axios
-      .get(`http://api.geonames.org/childrenJSON?geonameId=${countryId}&username=${GEO_USERNAME}`)
+      .get(`https://secure.geonames.org/childrenJSON?geonameId=${countryId}&username=${GEO_USERNAME}`)
       .then((response) => {
         const states = response.data.geonames.map((state) => ({
           value: state.adminCode1,
@@ -85,7 +84,7 @@ function CityForm() {
 
     axios
       .get(
-        `http://api.geonames.org/searchJSON?country=${countryCode}&adminCode1=${stateCode}&featureClass=P&maxRows=10&username=${GEO_USERNAME}`
+        `https://secure.geonames.org/searchJSON?country=${countryCode}&adminCode1=${stateCode}&featureClass=P&maxRows=10&username=${GEO_USERNAME}`
       )
       .then((response) => {
         const cities = response.data.geonames.map((city) => ({
