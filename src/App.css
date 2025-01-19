@@ -1,5 +1,7 @@
 /* Reset default margin and padding */
-html, body, #root {
+html,
+body,
+#root {
   height: 100%;
   margin: 0;
   padding: 0;
@@ -28,8 +30,10 @@ html, body, #root {
 /* Fixed 4x3 Zodiac Grid Layout */
 #zodiac-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr); /* Always 4 columns */
-  grid-template-rows: repeat(3, auto);  /* Always 3 rows */
+  grid-template-columns: repeat(4, 1fr);
+  /* Always 4 columns */
+  grid-template-rows: repeat(3, auto);
+  /* Always 3 rows */
   gap: 20px;
   width: 100%;
   max-width: 800px;
@@ -44,8 +48,8 @@ html, body, #root {
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  background-color: #fff;
-  border: 2px solid #cda653;
+  background-color: #f5f5f5;
+  border: 2px solid #808080;
   border-radius: 10px;
   padding: 10px;
   width: 100%;
@@ -53,15 +57,18 @@ html, body, #root {
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s, background-color 0.3s;
   text-align: center;
-  text-decoration: none; /* Remove underline */
-  color: inherit; /* Keep text color consistent */
+  text-decoration: none;
+  /* Remove underline */
+  color: inherit;
+  /* Keep text color consistent */
 }
 
 .zodiac-sign:hover {
   transform: scale(1.05);
-  background-color: #fff;
+  background-color: #f5f5f5;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-  cursor: pointer; /* Show pointer cursor */
+  cursor: pointer;
+  /* Show pointer cursor */
 }
 
 .zodiac-sign img {
@@ -74,7 +81,7 @@ html, body, #root {
   margin-top: 8px;
   font-size: 1rem;
   font-weight: bold;
-  color: #444;
+  color: #808080;
 }
 
 
@@ -84,8 +91,9 @@ header {
   margin-top: 20px;
 }
 
-header h1, header h2 {
-  color: #511907;
+header h1,
+header h2 {
+  color: #333333;
   margin: 10px 0;
 }
 
@@ -107,7 +115,7 @@ footer {
 
 .footer-link {
   margin: 0 10px;
-  color: #a9aaac;
+  color: #808080;
   text-decoration: none;
   font-size: 0.85rem;
 }
@@ -117,14 +125,14 @@ footer {
 }
 
 footer p {
-  color: #a9aaac;
+  color: #808080;
   font-size: 0.8rem;
 }
 
 /* Button Styling */
 button {
   padding: 10px 20px;
-  background-color: #9c27b0;
+  background-color: #808080;
   color: white;
   border: none;
   border-radius: 5px;
@@ -134,20 +142,21 @@ button {
 }
 
 button:hover:not(:disabled) {
-  background-color: #7b1fa2;
+  background-color: #666666;
 }
 
 button:disabled {
-  background-color: #ccc;
+  background-color: #cccccc;
   cursor: not-allowed;
 }
 
 /* Input Fields */
-input[type="text"], select {
+input[type="text"],
+select {
   width: 100%;
   padding: 10px;
   font-size: 1rem;
-  border: 1px solid #ccc;
+  border: 1px solid #cccccc;
   border-radius: 5px;
   box-sizing: border-box;
   margin-bottom: 10px;
@@ -155,7 +164,7 @@ input[type="text"], select {
 
 /* Error Message */
 .error-text {
-  color: red;
+  color: #ff0000;
   font-size: 0.75rem;
   margin-top: 4px;
 }
@@ -163,8 +172,10 @@ input[type="text"], select {
 /* Responsive Design - Keep 4x3 grid on all screens */
 @media only screen and (max-width: 600px) {
   #zodiac-grid {
-    grid-template-columns: repeat(4, 1fr);  /* Keep 4 columns */
-    grid-template-rows: repeat(3, auto);    /* Keep 3 rows */
+    grid-template-columns: repeat(4, 1fr);
+    /* Keep 4 columns */
+    grid-template-rows: repeat(3, auto);
+    /* Keep 3 rows */
   }
 
   header h1 {
@@ -187,5 +198,110 @@ input[type="text"], select {
   button {
     font-size: 0.9rem;
     padding: 8px 16px;
+  }
+}
+
+/* Grey Tones */
+html,
+body,
+#root {
+  background-color: #f0f0f0;
+}
+
+.zodiac-sign {
+  background-color: #f0f0f0;
+  border: 2px solid #808080;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.zodiac-sign:hover {
+  background-color: #f0f0f0;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.zodiac-sign p {
+  color: #808080;
+}
+
+header h1,
+header h2 {
+  color: #333333;
+}
+
+.footer-link {
+  color: #808080;
+}
+
+footer p {
+  color: #808080;
+}
+
+button {
+  background-color: #808080;
+}
+
+button:hover:not(:disabled) {
+  background-color: #666666;
+}
+
+input[type="text"],
+select {
+  border: 1px solid #cccccc;
+}
+
+.error-text {
+  color: #ff0000;
+}
+
+/* Mobile Styling for Zodiac Grid */
+@media only screen and (max-width: 600px) {
+  #zodiac-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    /* 2 columns for better spacing */
+    gap: 15px;
+    padding: 20px;
+    width: 100%;
+    justify-content: center;
+  }
+
+  .zodiac-sign {
+    height: auto;
+    padding: 15px;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s ease-in-out;
+  }
+
+  .zodiac-sign img {
+    width: 70px;
+    height: 70px;
+    margin-bottom: 10px;
+  }
+
+  .zodiac-sign:hover {
+    transform: scale(1.1);
+  }
+
+  .zodiac-sign p {
+    font-size: 0.9rem;
+    text-align: center;
+  }
+
+  header h1,
+  header h2 {
+    font-size: 1.2rem;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  footer {
+    margin-top: 20px;
+    padding: 10px;
+    font-size: 0.8rem;
   }
 }

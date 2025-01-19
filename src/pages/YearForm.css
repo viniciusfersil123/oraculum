@@ -1,87 +1,89 @@
 /* Container for the year form */
 .year-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    padding: 30px;
-    border-radius: 10px;
-    width: 100%;
-    max-width: 800px;
-    box-sizing: border-box;
-  }
-  
-  /* Title and Subtitle Styling */
-  .year-container h2 {
-    font-size: 2rem;
-    color: #511907;
-    margin-bottom: 10px;
-  }
-  
-  .year-container p {
-    font-size: 1.1rem;
-    color: #444;
-    margin-bottom: 20px;
-  }
-  
-  /* Grid Layout for Years */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 30px;
+  border-radius: 10px;
+  width: 100%;
+  max-width: 800px;
+  box-sizing: border-box;
+}
+
+/* Title and Subtitle Styling */
+.year-container h2 {
+  font-size: 2rem;
+  color: #777777; /* Gray tone */
+  margin-bottom: 10px;
+}
+
+.year-container p {
+  font-size: 1.1rem;
+  color: #999999; /* Gray tone */
+  margin-bottom: 20px;
+}
+
+/* Grid Layout for Years */
+.years-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  /* 5 columns for balance */
+  gap: 15px;
+  justify-items: center;
+  width: 100%;
+}
+/* Year Button Styling */
+.year-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #dddddd; /* Gray tone */
+  border: 2px solid #999999; /* Gray tone */
+  border-radius: 8px;
+  width: 80px;
+  height: 50px;
+  font-size: 1rem;
+  font-weight: bold;
+  color: #333333; /* Darker gray tone */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s, background-color 0.2s, box-shadow 0.2s, color 0.2s; /* Added color transition */
+  cursor: pointer;
+}
+
+.year-button:hover {
+  transform: scale(1.1);
+  background-color: #eeeeee; /* Light gray tone */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  color: #ffffff; /* White */
+  transition: transform 0.2s, background-color 0.2s, box-shadow 0.2s, color 0.2s; /* Added color transition */
+}
+
+.year-button.selected {
+  background-color: #777777; /* Gray tone */
+  color: #ffffff; /* White */
+  border-color: #666666; /* Dark gray tone */
+  box-shadow: 0 4px 10px rgba(156, 39, 176, 0.5);
+}
+
+/* Responsive Design */
+@media only screen and (max-width: 600px) {
   .years-grid {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr); /* 5 columns for balance */
-    gap: 15px;
-    justify-items: center;
-    width: 100%;
+    grid-template-columns: repeat(3, 1fr);
+    /* Adjust grid for smaller screens */
   }
-  
-  /* Year Button Styling */
+
   .year-button {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #fff;
-    border: 2px solid #cda653;
-    border-radius: 8px;
-    width: 80px;
-    height: 50px;
+    width: 70px;
+    height: 45px;
+    font-size: 0.9rem;
+  }
+
+  .year-container h2 {
+    font-size: 1.6rem;
+  }
+
+  .year-container p {
     font-size: 1rem;
-    font-weight: bold;
-    color: #444;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    transition: transform 0.2s, background-color 0.2s, box-shadow 0.2s;
-    cursor: pointer;
   }
-  
-  .year-button:hover {
-    transform: scale(1.1);
-    background-color: #fff;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-  }
-  
-  .year-button.selected {
-    background-color: #9c27b0;
-    color: #fff;
-    border-color: #7b1fa2;
-    box-shadow: 0 4px 10px rgba(156, 39, 176, 0.5);
-  }
-  
-  /* Responsive Design */
-  @media only screen and (max-width: 600px) {
-    .years-grid {
-      grid-template-columns: repeat(3, 1fr); /* Adjust grid for smaller screens */
-    }
-  
-    .year-button {
-      width: 70px;
-      height: 45px;
-      font-size: 0.9rem;
-    }
-  
-    .year-container h2 {
-      font-size: 1.6rem;
-    }
-  
-    .year-container p {
-      font-size: 1rem;
-    }
-  }
-  
+}

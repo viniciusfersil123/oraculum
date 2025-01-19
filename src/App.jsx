@@ -10,8 +10,7 @@ import CityForm from "./pages/CityForm";  // ✅ Import CityForm
 import PageWrapper from "./components/PageWrapper";
 import FinalPage from "./pages/FinalPage";
 
-let title = "93% of people don't know this truth about their zodiac sign. Do you?Click your sign below to find out now:";
-
+let title = "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dignissimos nulla reprehenderit fuga autem nobis est voluptatum labore corporis quisquam illum maxime, sapiente quaerat dolor enim a. Dicta distinctio vitae officiis?"
 function App() {
   return (
     <Router>

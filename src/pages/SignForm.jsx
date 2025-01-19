@@ -6,10 +6,12 @@ function SignForm() {
   const { signName } = useParams();
   const navigate = useNavigate();
   const [selectedDay, setSelectedDay] = useState(null);
+  const [selectedMonth, setSelectedMonth] = useState(null);
 
-  const handleDayClick = (day) => {
+  const handleDayClick = (day, month) => {
     setSelectedDay(day);
-    navigate(`/sign/${signName}/decade?day=${day}`);
+    setSelectedMonth(month);
+    navigate(`/sign/${signName}/decade?day=${day}&month=${month}`);
   };
 
   // Zodiac signs with their date ranges
@@ -51,7 +53,7 @@ function SignForm() {
 
       const days = Array.from({ length: endDay - startDay + 1 }, (_, i) => i + startDay);
 
-      months.push({ month: monthNames[month], days });
+      months.push({ month: month + 1, monthName: monthNames[month], days });
       if (isEndMonth) break;
     }
 
@@ -63,13 +65,15 @@ function SignForm() {
       <p>Select the <strong><u>day you were born</u></strong></p>
       {signMonths.map((monthData) => (
         <div key={monthData.month} className="month-section">
-          <h3>{monthData.month}</h3>
+          <h3>{monthData.monthName}</h3>
           <div className="days-grid">
             {monthData.days.map((day) => (
               <button
                 key={day}
-                className={`day-button ${selectedDay === day ? 'selected' : ''}`}
-                onClick={() => handleDayClick(day)}
+                className={`day-button ${
+                  selectedDay === day && selectedMonth === monthData.month ? 'selected' : ''
+                }`}
+                onClick={() => handleDayClick(day, monthData.month)}
               >
                 {day}
               </button>

@@ -7,6 +7,7 @@ function DecadeForm() {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
   const day = searchParams.get('day');
+  const month = searchParams.get('month');
   const [selectedDecade, setSelectedDecade] = useState(null);
 
   const decades = [
@@ -14,11 +15,11 @@ function DecadeForm() {
     '1980s', '1990s', '2000s', '2010s', '2020s'
   ];
 
-
   const handleDecadeClick = (decade) => {
     setSelectedDecade(decade);
-    navigate(`/sign/${signName}/year?day=${day}&decade=${decade}`);  // ✅ Navigate to YearForm
+    navigate(`/sign/${signName}/year?day=${day}&month=${month}&decade=${decade}`);  // ✅ Navigate with day, month, and decade
   };
+  
 
 
   return (

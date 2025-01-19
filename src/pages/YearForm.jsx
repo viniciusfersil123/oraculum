@@ -6,6 +6,7 @@ function YearForm() {
   const { signName } = useParams();
   const [searchParams] = useSearchParams();
   const day = searchParams.get('day');
+  const month = searchParams.get('month');
   const decade = searchParams.get('decade');
   const navigate = useNavigate();
   const [selectedYear, setSelectedYear] = useState(null);
@@ -14,7 +15,8 @@ function YearForm() {
 
   const handleYearClick = (year) => {
     setSelectedYear(year);
-    navigate(`/sign/${signName}/time?day=${day}&decade=${decade}&year=${year}`);
+    //add month
+    navigate(`/sign/${signName}/time?day=${day}&month=${month}&decade=${decade}&year=${year}`);  // ✅ Navigate with day, month, decade, and year
   };
 
   return (

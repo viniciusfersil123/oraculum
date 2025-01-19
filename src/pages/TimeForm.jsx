@@ -7,6 +7,7 @@ function TimeForm() {
     const { signName } = useParams();
     const [searchParams] = useSearchParams();
     const day = searchParams.get('day');
+    const month = searchParams.get('month');
     const decade = searchParams.get('decade');
     const year = searchParams.get('year');
     const navigate = useNavigate();
@@ -16,7 +17,7 @@ function TimeForm() {
     const [period, setPeriod] = useState('AM');
 
     const handleContinue = () => {
-        navigate(`/sign/${signName}/city?day=${day}&decade=${decade}&year=${year}&hour=${hour}&minute=${minute}&period=${period}`);
+        navigate(`/sign/${signName}/city?day=${day}&month=${month}&decade=${decade}&year=${year}&hour=${hour}&minute=${minute}&period=${period}`);
     };
 
     const hours = Array.from({ length: 12 }, (_, i) => String(i + 1).padStart(2, '0'));
