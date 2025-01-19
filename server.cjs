@@ -69,9 +69,60 @@ app.get('/api/horoscope', async (req, res) => {
   }
 });
 
-// Fetch Daily Prediction (v2)
-// Update the API endpoint if needed
+// Fetch Cities based on State/Country using GeoNames API
+app.get('/api/cities', async (req, res) => {
+  const { countryCode, stateCode } = req.query;
 
+  if (!countryCode || !stateCode) {
+    return res.status(400).json({ error: 'Country code and state code are required.' });
+  }
+
+  try {
+    // First fetch country GeonameId
+    const countryResponse = await axios.get('http://api.geonames.org/countryInfoJSON', {
+      params: {
+        username: process.env.GEONAMES_USERNAME,
+      }
+    });
+
+    const country = countryResponse.data.geonames.find(country => country.countryCode === countryCode);
+    const countryGeonameId = country ? country.geonameId : null;
+
+    if (!countryGeonameId) {
+      return res.status(400).json({ error: 'Invalid country code' });
+    }
+
+    // Now fetch states based on the countryId
+    const statesResponse = await axios.get('http://api.geonames.org/childrenJSON', {
+      params: {
+        geonameId: countryGeonameId,
+        username: process.env.GEONAMES_USERNAME
+      }
+    });
+
+    const state = statesResponse.data.geonames.find(state => state.geonameId === stateCode);
+
+    if (state) {
+      // If state exists, fetch cities under the state
+      const citiesResponse = await axios.get('http://api.geonames.org/searchJSON', {
+        params: {
+          parentId: state.geonameId,
+          username: process.env.GEONAMES_USERNAME
+        }
+      });
+
+      res.json(citiesResponse.data);
+    } else {
+      res.status(400).json({ error: 'Invalid state code' });
+    }
+  } catch (err) {
+    console.error('Error fetching cities:', err.response?.data || err.message);
+    res.status(500).json({ error: 'Failed to fetch cities data.' });
+  }
+});
+
+
+// Fetch Planet Position (v2)
 app.get('/api/planet-position', async (req, res) => {
   const { lat, lon, datetime, planets, ayanamsa, coordinates } = req.query;
 
@@ -86,9 +137,8 @@ app.get('/api/planet-position', async (req, res) => {
         client_id: process.env.CLIENT_ID,
         client_secret: process.env.CLIENT_SECRET
       }), {
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
-      }
-    );
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+    });
 
     const accessToken = tokenResponse.data.access_token;
 
@@ -110,7 +160,6 @@ app.get('/api/planet-position', async (req, res) => {
     res.status(500).json({ error: 'Failed to fetch planet position data.' });
   }
 });
-
 
 // Listen on port
 app.listen(PORT, () => {
