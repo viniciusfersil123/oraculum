@@ -1,74 +1,15 @@
-/* Final Page Container Styling */
-.final-container {
-    max-width: 100%;
-    padding: 20px;
-    margin: 0 auto;
-    text-align: center;
-    box-sizing: border-box;
-  }
-  
-  /* Responsive YouTube Video */
-  .youtube-video iframe {
-    width: 100%;
-    height: auto;
-    max-width: 560px;
-    aspect-ratio: 16 / 9; /* Ensures responsive scaling */
-  }
-  
-  /* Headers Styling */
-  .final-container h3 {
-    margin: 10px 0;
-    font-size: 1.2rem;
-    word-wrap: break-word; /* Prevent text overflow */
-  }
-  
-  /* Daily Prediction Styling */
-  .daily-prediction {
-    margin-top: 20px;
-  }
-  
-  .daily-prediction p {
-    font-size: 1rem;
-    line-height: 1.5;
-    word-wrap: break-word; /* Prevent overflow in long words */
-  }
-  
-  /* Button Styling */
-  button {
-    margin-top: 20px;
-    padding: 10px 20px;
-    background-color: #666666;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: background-color 0.3s ease-in-out;
-  }
-  
-  button:hover {
-    background-color: #333333;
-  }
-  
-  /* Responsive Adjustments for Mobile */
-  @media only screen and (max-width: 600px) {
-    .final-container h2 {
-      font-size: 1.5rem;
-    }
-  
-    .final-container h3 {
-      font-size: 1rem;
-      margin: 8px 0;
-    }
-  
-    .daily-prediction p {
-      font-size: 0.9rem;
-      line-height: 1.4;
-    }
-  
-    button {
-      font-size: 0.9rem;
-      padding: 8px 16px;
-    }
-  }
-  
+/* Final Page Specific Styling */
+.styled-box {
+  border-bottom: 0px solid rgb(229, 231, 235);
+  border-left: 0px solid rgb(229, 231, 235);
+  border-right: 0px solid rgb(229, 231, 235);
+  border-top: 0px solid rgb(229, 231, 235);
+  box-sizing: border-box;
+  display: block;
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  height: 268px;
+  line-height: 24px;
+  text-size-adjust: 100%;
+  unicode-bidi: isolate;
+  width: 600px;
+}

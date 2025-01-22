@@ -1,0 +1,14 @@
+.footer {
+    text-align: center;
+    background-color: transparent; /* Ensure no background color */
+    padding: 10px 0; /* Space around the text */
+  }
+  
+  .footer p {
+    color: #fff; /* White text */
+    font-size: 24px; /* Smaller font size */
+    letter-spacing: 2px; /* Wider letter spacing */
+    text-transform: uppercase; /* Capitalize all letters */
+    margin: 0; /* Remove default margin */
+  }
+  

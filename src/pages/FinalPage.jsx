@@ -18,6 +18,23 @@ const zodiacSigns = {
   pis: "Pisces",
 };
 
+// Map planet abbreviations to full names
+const planetNames = {
+  Sun: "Sun",
+  Moon: "Moon",
+  Merc: "Mercury",
+  Venu: "Venus",
+  Mars: "Mars",
+  Jupi: "Jupiter",
+  Satu: "Saturn",
+  Uran: "Uranus",
+  Nept: "Neptune",
+  Plut: "Pluto",
+  Nort: "North Node",
+  Asce: "Ascendant",
+  Midh: "Midheaven", // Added Midheaven (Midh)
+};
+
 function FinalPage() {
   const { signName } = useParams();
   const [searchParams] = useSearchParams();
@@ -74,19 +91,29 @@ function FinalPage() {
 
         console.log("Raw Output from Astrolog:", rawOutput);
 
-        // Extract Ascendant
-        const asceLine = rawOutput.match(/Asce:\s+(\d+[A-Za-z]{3}\d+)/);
-        console.log("Matched Asce Line:", asceLine);
+        // Extract Planets, Ascendant, and Midheaven
+        const planetMatches = rawOutput.match(/(Sun\s+:|Moon|Merc|Venu|Mars|Jupi|Satu|Uran|Nept|Plut|Nort|Asce|Midh):\s+([A-Za-z0-9]+)/g);
+        const planets = {};
 
-        const ascendant = asceLine
-          ? zodiacSigns[asceLine[1].substring(2, 5).toLowerCase()] || "Unknown"
-          : "Unknown";
+        if (planetMatches) {
+          planetMatches.forEach((match) => {
+            const [_, planet, location] = match.match(/(Sun\s+:|Moon|Merc|Venu|Mars|Jupi|Satu|Uran|Nept|Plut|Nort|Asce|Midh):\s+([A-Za-z0-9]+)/);
+            const trimmedPlanet = planet.trim().replace(/\s+:$/, ""); // Handle extra space and colon
+            const fullPlanetName = planetNames[trimmedPlanet] || trimmedPlanet;
+            planets[fullPlanetName] = zodiacSigns[location.replace(/\d+/g, "").toLowerCase()] || "Unknown";
 
-        console.log("Parsed Ascendant:", ascendant);
+            // Debugging specific to Sun and Midheaven
+            if (trimmedPlanet === "Sun" || trimmedPlanet === "Midh") {
+              console.log(`Debug ${trimmedPlanet}:`, { trimmedPlanet, location, sign: planets[fullPlanetName] });
+            }
+          });
+        }
+
+        console.log("Parsed Planets:", planets);
 
         setAstroData({
           rawOutput,
-          ascendant,
+          planets,
         });
       } catch (err) {
         console.error("Error fetching astrolog data:", err.message);
@@ -113,9 +140,12 @@ function FinalPage() {
       {astroData && (
         <div className="astro-results">
           <p><strong>Your Sign:</strong> {signName.charAt(0).toUpperCase() + signName.slice(1)}</p>
-          <p><strong>Ascendant:</strong> {astroData.ascendant}</p>
-          <p><strong>Raw Output:</strong></p>
-          <pre>{astroData.rawOutput}</pre>
+          <p><strong>Planets, Ascendant, and Midheaven:</strong></p>
+          <ul>
+            {Object.entries(astroData.planets).map(([planet, sign], index) => (
+              <li key={index}><strong>{planet}:</strong> {sign}</li>
+            ))}
+          </ul>
         </div>
       )}
 

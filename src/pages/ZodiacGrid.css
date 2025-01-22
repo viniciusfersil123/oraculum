@@ -1,0 +1,88 @@
+/* CSS for ZodiacGrid Component */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: url('/assets/background.png') no-repeat center center fixed;
+    background-size: cover;
+    color: white;
+    text-align: center;
+}
+
+h1 {
+    font-size: 1.8rem;
+    /* Adjust for desired size */
+    font-weight: bold;
+    color: white;
+    text-align: center;
+    margin: 20px 0;
+    line-height: 1.4;
+    text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.6);
+}
+
+h1 strong {
+    color: #debf54;
+    /* Golden yellow for emphasis */
+    font-weight: bold;
+}
+
+
+#zodiac-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 40px;
+    max-width: 800px;
+    margin: 50px auto;
+    padding: 0 20px;
+}
+
+.zodiac-sign {
+    text-decoration: none;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s;
+}
+
+.zodiac-sign img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.zodiac-sign:hover img {
+    transform: scale(1.1);
+    box-shadow: 0 5px 15px rgba(255, 255, 255, 0.4);
+}
+
+.zodiac-sign p {
+    font-size: 1.2rem;
+    /* Slightly larger font size */
+    font-weight: 700;
+    /* Bold font */
+    text-transform: uppercase;
+    /* Make the text uppercase */
+    color: white;
+    /* White text color */
+    margin: 10px 0 0;
+    /* Adjust spacing */
+    text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.6);
+    /* Add a shadow effect similar to the image */
+    font-family: 'Arial', sans-serif;
+    /* Ensure sans-serif font */
+    letter-spacing: 1px;
+    /* Slightly spaced letters */
+    text-align: center;
+    /* Center-align text */
+}
+
+
+h1 {
+    font-size: 2rem;
+    margin-top: 20px;
+    font-weight: bold;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+}
+

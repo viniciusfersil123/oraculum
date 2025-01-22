@@ -1,24 +1,30 @@
 /* Reset default margin and padding */
 html,
-body,
-#root {
+body {
   height: 100%;
+  /* Ensure html and body occupy the full viewport height */
   margin: 0;
   padding: 0;
-  background-color: #f5f5f5;
-  font-family: 'Open Sans', Arial, sans-serif;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+}
+
+#root {
+  height: 100%;
+  width: 100%;
+  /* Allow React root to fill the viewport */
+  display: flex;
+  flex-direction: column;
   align-items: center;
-  text-align: center;
+  justify-content: center;
 }
 
 /* Full-page container */
-.container {
+.app-container {
+  flex: 1;
+  /* Allow the container to grow and fill remaining space */
   width: 100%;
   max-width: 1200px;
-  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -26,64 +32,6 @@ body,
   padding: 20px;
   box-sizing: border-box;
 }
-
-/* Fixed 4x3 Zodiac Grid Layout */
-#zodiac-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  /* Always 4 columns */
-  grid-template-rows: repeat(3, auto);
-  /* Always 3 rows */
-  gap: 20px;
-  width: 100%;
-  max-width: 800px;
-  margin-top: 20px;
-  padding: 0 10px;
-  box-sizing: border-box;
-}
-
-/* Zodiac Sign Card */
-.zodiac-sign {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  background-color: #f5f5f5;
-  border: 2px solid #808080;
-  border-radius: 10px;
-  padding: 10px;
-  width: 100%;
-  height: 130px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s, background-color 0.3s;
-  text-align: center;
-  text-decoration: none;
-  /* Remove underline */
-  color: inherit;
-  /* Keep text color consistent */
-}
-
-.zodiac-sign:hover {
-  transform: scale(1.05);
-  background-color: #f5f5f5;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-  cursor: pointer;
-  /* Show pointer cursor */
-}
-
-.zodiac-sign img {
-  width: 60px;
-  height: 60px;
-  object-fit: contain;
-}
-
-.zodiac-sign p {
-  margin-top: 8px;
-  font-size: 1rem;
-  font-weight: bold;
-  color: #808080;
-}
-
 
 /* Header Styling */
 header {
@@ -109,8 +57,19 @@ header h2 {
 /* Footer Styling */
 footer {
   width: 100%;
+  text-align: center;
   padding: 10px 0;
   background-color: transparent;
+  margin-top: auto;
+  /* Push footer to the bottom */
+}
+
+footer p {
+  color: #808080;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin: 0;
 }
 
 .footer-link {
@@ -122,11 +81,6 @@ footer {
 
 .footer-link:hover {
   text-decoration: underline;
-}
-
-footer p {
-  color: #808080;
-  font-size: 0.8rem;
 }
 
 /* Button Styling */
@@ -169,100 +123,14 @@ select {
   margin-top: 4px;
 }
 
-/* Responsive Design - Keep 4x3 grid on all screens */
+/* Responsive Design */
 @media only screen and (max-width: 600px) {
   #zodiac-grid {
-    grid-template-columns: repeat(4, 1fr);
-    /* Keep 4 columns */
-    grid-template-rows: repeat(3, auto);
-    /* Keep 3 rows */
-  }
-
-  header h1 {
-    font-size: 1.6rem;
-  }
-
-  header h2 {
-    font-size: 1.2rem;
-  }
-
-  .zodiac-sign {
-    height: 100px;
-  }
-
-  .zodiac-sign img {
-    width: 50px;
-    height: 50px;
-  }
-
-  button {
-    font-size: 0.9rem;
-    padding: 8px 16px;
-  }
-}
-
-/* Grey Tones */
-html,
-body,
-#root {
-  background-color: #f0f0f0;
-}
-
-.zodiac-sign {
-  background-color: #f0f0f0;
-  border: 2px solid #808080;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
-
-.zodiac-sign:hover {
-  background-color: #f0f0f0;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-}
-
-.zodiac-sign p {
-  color: #808080;
-}
-
-header h1,
-header h2 {
-  color: #333333;
-}
-
-.footer-link {
-  color: #808080;
-}
-
-footer p {
-  color: #808080;
-}
-
-button {
-  background-color: #808080;
-}
-
-button:hover:not(:disabled) {
-  background-color: #666666;
-}
-
-input[type="text"],
-select {
-  border: 1px solid #cccccc;
-}
-
-.error-text {
-  color: #ff0000;
-}
-
-/* Mobile Styling for Zodiac Grid */
-@media only screen and (max-width: 600px) {
-  #zodiac-grid {
-    display: grid;
     grid-template-columns: repeat(2, 1fr);
-    /* 2 columns for better spacing */
+    /* Adjust to 2 columns */
     gap: 15px;
     padding: 20px;
     width: 100%;
-    justify-content: center;
   }
 
   .zodiac-sign {

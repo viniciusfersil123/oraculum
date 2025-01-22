@@ -1,5 +1,5 @@
 import React from 'react';
-import '../App.css';
+import './ZodiacGrid.css';
 
 const zodiacSigns = [
   'Aries', 'Taurus', 'Gemini', 'Cancer',

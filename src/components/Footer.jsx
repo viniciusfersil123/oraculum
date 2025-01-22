@@ -1,13 +1,10 @@
 import React from 'react';
+import './Footer.css'; // Import the corresponding CSS file
 
 function Footer() {
   return (
-    <footer className="text-center mt-5">
-      <a href="/privacy">Privacy</a> |
-      <a href="/terms">Terms</a> |
-      <a href="/contact">Contact</a> |
-      <a href="/disclaimer">Disclaimer</a>
-      <p>&copy; 2025 Astrology Insights. All rights reserved.</p>
+    <footer className="footer">
+      <p>&copy; 2025 ALL RIGHTS RESERVED</p>
     </footer>
   );
 }
