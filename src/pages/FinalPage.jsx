@@ -76,7 +76,7 @@ function FinalPage() {
         console.log("Request Data:", requestData);
 
         // Fetch astrolog output
-        const response = await fetch("http://localhost:5000/api/astrolog", {
+        const response = await fetch("/api/astrolog", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(requestData),
