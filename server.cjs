@@ -7,15 +7,15 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 // Path to the Astrolog executable
-const astrologPath = '../astrolog/./astrolog';
+const astrologPath = path.join(__dirname, 'astrolog', './astrolog');
 
 app.use(cors());
 app.use(express.json());
 
-// Serve static files from the root directory
-app.use(express.static(path.join(__dirname)));
+// Serve the React build folder
+app.use(express.static(path.join(__dirname, 'dist')));
 
-// API Endpoint for Astrolog
+// Handle API Endpoint for Astrolog
 app.post('/api/astrolog', (req, res) => {
   const { day, month, year, hour, minute, latitude, longitude } = req.body;
 
@@ -46,9 +46,9 @@ app.post('/api/astrolog', (req, res) => {
   });
 });
 
-// Handle React frontend routing
+// Serve React index.html for all other routes
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'index.html'));
+  res.sendFile(path.join(__dirname, 'dist', 'index.html'));
 });
 
 // Start the server
