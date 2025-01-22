@@ -1,13 +1,13 @@
 const express = require('express');
 const { exec } = require('child_process');
 const cors = require('cors');
-const path = require('path');t
+const path = require('path');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
 
 // Path to the Astrolog executable
-const astrologPath = path.join(__dirname, 'astrolog', './astrolog');
+const astrologPath = path.join(__dirname, 'astrolog', 'astrolog');
 
 app.use(cors());
 app.use(express.json());
