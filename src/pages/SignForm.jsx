@@ -62,7 +62,9 @@ function SignForm() {
 
   return (
     <div className="form-container">
-      <p>Select the <strong><u>day you were born</u></strong></p>
+      <div className='form-header'>
+        <p>Select the <strong><u>day you were born</u></strong></p>
+      </div>
       {signMonths.map((monthData) => (
         <div key={monthData.month} className="month-section">
           <h3>{monthData.monthName}</h3>
@@ -70,9 +72,8 @@ function SignForm() {
             {monthData.days.map((day) => (
               <button
                 key={day}
-                className={`day-button ${
-                  selectedDay === day && selectedMonth === monthData.month ? 'selected' : ''
-                }`}
+                className={`day-button ${selectedDay === day && selectedMonth === monthData.month ? 'selected' : ''
+                  }`}
                 onClick={() => handleDayClick(day, monthData.month)}
               >
                 {day}

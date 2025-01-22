@@ -6,7 +6,7 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 // Path to the Astrolog executable
-const astrologPath = '/home/vinfernandes/Projects/oraculum/oraculum/astrolog/./astrolog';
+const astrologPath = './astrolog/astrolog';
 
 app.use(cors());
 app.use(express.json());

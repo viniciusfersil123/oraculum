@@ -4,18 +4,25 @@
   flex-direction: column;
   align-items: center;
   text-align: center;
-  padding: 30px;
-  border-radius: 10px;
+  padding: 40px;
+  border-radius: 15px;
   width: 100%;
   max-width: 600px;
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.6);
   box-sizing: border-box;
+  color: #fff;
+  margin-top: 20px;
+  text-transform: uppercase;
 }
 
 /* Title Styling */
 .day-question h2 {
-  font-size: 2rem;
-  color: #333333; /* Grey tone */
+  font-size: 2.4rem;
+  color: #fecd1a;
   margin-bottom: 20px;
+  text-transform: uppercase;
+  font-weight: bold;
+  text-shadow: 0px 3px 6px rgba(0, 0, 0, 0.8);
 }
 
 /* Button Styling */
@@ -23,40 +30,40 @@
   width: 150px;
   padding: 10px 20px;
   margin: 10px;
-  background-color: #f5f5f5; /* Grey tone */
-  border: 2px solid #999999; /* Grey tone */
-  border-radius: 8px;
-  font-size: 1rem;
+  background-color: #2c2c50;
+  border: 2px solid #fecd1a;
+  border-radius: 10px;
+  font-size: 1.2rem;
   font-weight: bold;
-  color: #666666; /* Grey tone */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  color: #b4b4ff;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.4);
   cursor: pointer;
-  transition: transform 0.2s, background-color 0.2s, box-shadow 0.2s;
+  transition: transform 0.3s, background-color 0.3s, box-shadow 0.3s, color 0.3s;
 }
 
 .day-question button:hover {
   transform: scale(1.1);
-  background-color: #ffffff; /* White */
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-  transition: transform 0.2s, background-color 0.2s, box-shadow 0.2s;
+  background-color: #b4b4ff;
+  box-shadow: 0 5px 12px rgba(0, 0, 0, 0.5);
+  color: black;
 }
 
 .day-question button:active {
-  background-color: #666666; /* Grey tone */
-  color: #ffffff; /* White */
-  border-color: #333333; /* Grey tone */
-  box-shadow: 0 4px 10px rgba(102, 102, 102, 0.5); /* Grey tone */
+  background-color: #fecd1a;
+  color: #000;
+  border-color: #ffffff;
+  box-shadow: 0 5px 12px rgba(255, 255, 255, 0.6);
 }
 
 /* Responsive Design */
 @media only screen and (max-width: 600px) {
   .day-question h2 {
-    font-size: 1.6rem;
+    font-size: 2rem;
   }
 
   .day-question button {
     width: 130px;
     padding: 8px 16px;
-    font-size: 0.9rem;
+    font-size: 1rem;
   }
 }

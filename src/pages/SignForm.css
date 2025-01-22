@@ -4,46 +4,73 @@
   flex-direction: column;
   align-items: center;
   text-align: center;
-  padding: 30px;
-  border-radius: 10px;
+  padding: 40px;
+  border-radius: 15px;
   width: 100%;
   max-width: 800px;
-
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.6);
+  /* Soft shadow for depth */
   box-sizing: border-box;
+  color: #fff;
+  /* White text for readability */
+  margin-top: -120px;
 }
 
 /* Title and Subtitle Styling */
 .form-container h2 {
-  font-size: 2rem;
-  color: #333;
-  margin-bottom: 10px;
+  font-size: 2.4rem;
+  /* Larger font size for emphasis */
+  color: #fecd1a;
+  /* Gold color for important text */
+  margin-bottom: 15px;
+  text-transform: uppercase;
+  font-weight: bold;
+  text-shadow: 0px 3px 6px rgba(0, 0, 0, 0.8);
+  /* Stronger text shadow */
 }
 
 .form-container p {
-  font-size: 1.1rem;
-  color: #666;
-  margin-bottom: 20px;
+  font-size: 1.2rem;
+  /* Light purple text for subtler content */
+  margin-bottom: 25px;
+  text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.6);
+  /* Subtle shadow */
+}
+
+
+.form-header {
+  font-weight: bold;
+  text-transform: uppercase;
+  strong {
+    color: #debf54;
+  }
 }
 
 /* Month Section */
 .month-section {
   width: 100%;
-  margin-bottom: 20px;
+  margin-bottom: 30px;
 }
 
 .month-section h3 {
-  font-size: 1.2rem;
-  color: #666;
+  font-size: 1.4rem;
+  color: #ffffff;
+  /* White text for section headers */
   margin-bottom: 10px;
   text-transform: uppercase;
-  letter-spacing: 1px;
+  letter-spacing: 1.5px;
+  /* Slightly wider letter spacing */
+  text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.7);
+  /* Shadow for visibility */
 }
 
 /* Grid Layout for Days */
 .days-grid {
   display: grid;
-  grid-template-columns: repeat(7, 1fr); /* 7 columns for days of the week */
-  gap: 10px;
+  grid-template-columns: repeat(7, 1fr);
+  /* 7 columns for days of the week */
+  gap: 15px;
+  /* More spacing between buttons */
   justify-items: center;
   width: 100%;
 }
@@ -53,50 +80,82 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #f5f5f5;
-  border: 2px solid #ccc;
-  border-radius: 8px;
-  width: 45px;
-  height: 45px;
-  font-size: 1rem;
+  background-color: #2c2c50;
+  /* Dark purple background */
+  border: 2px solid #fecd1a;
+  /* Gold border for emphasis */
+  border-radius: 50%;
+  /* Circular buttons */
+  width: 60px;
+  /* Larger buttons */
+  height: 60px;
+  font-size: 1.2rem;
+  /* Bigger text for readability */
   font-weight: bold;
-  color: #666;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  transition: transform 0.2s, background-color 0.2s, box-shadow 0.2s;
+  color: #b4b4ff;
+  /* Light purple text */
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.4);
+  /* Shadow for depth */
+  transition: transform 0.3s, background-color 0.3s, box-shadow 0.3s, color 0.3s;
   cursor: pointer;
 }
+
 .day-button:hover {
-  transform: scale(1.1);
-  background-color: #f5f5f5;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-  color: #fff; /* Changed font color to white */
-  transition: color 0.2s; /* Added line for smooth transition */
+  transform: scale(1.15);
+  background-color: #b4b4ff;
+  /* Light purple hover background */
+  box-shadow: 0 5px 12px rgba(0, 0, 0, 0.5);
+  /* Bigger shadow */
+  color: #fecd1a;
+  /* Dark purple text on hover */
 }
 
 .day-button.selected {
-  background-color: #ccc;
-  color: #fff;
-  border-color: #999;
-  box-shadow: 0 4px 10px rgba(156, 156, 156, 0.5);
+  background-color: #fecd1a;
+  /* Gold background for selected state */
+  color: #000;
+  /* Black text */
+  border-color: #ffffff;
+  /* White border for contrast */
+  box-shadow: 0 5px 12px rgba(255, 255, 255, 0.6);
+  /* Glow effect */
+}
+
+/* Footer Styling */
+footer {
+  margin-top: 30px;
+  font-size: 0.9rem;
+  color: #b4b4ff;
+  /* Light purple text */
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.8);
+  /* Subtle shadow for visibility */
 }
 
 /* Responsive Design */
 @media only screen and (max-width: 600px) {
   .days-grid {
-    grid-template-columns: repeat(5, 1fr); /* Adjust grid for smaller screens */
+    grid-template-columns: repeat(5, 1fr);
+    /* Adjust grid for smaller screens */
+    gap: 10px;
+    /* Adjust spacing */
   }
 
   .day-button {
-    width: 40px;
-    height: 40px;
-    font-size: 0.9rem;
+    width: 50px;
+    /* Smaller buttons for smaller screens */
+    height: 50px;
+    font-size: 1rem;
   }
 
   .form-container h2 {
-    font-size: 1.6rem;
+    font-size: 2rem;
+    /* Adjust title size */
   }
 
   .form-container p {
     font-size: 1rem;
+    /* Adjust subtitle size */
   }
 }

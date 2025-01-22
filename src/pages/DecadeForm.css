@@ -4,31 +4,51 @@
   flex-direction: column;
   align-items: center;
   text-align: center;
-  padding: 30px;
-  border-radius: 10px;
+  padding: 40px;
+  border-radius: 15px;
   width: 100%;
   max-width: 800px;
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.6);
+  /* Match the form shadow */
   box-sizing: border-box;
+  color: #fff;
+  /* White text for readability */
+  margin-top: 20px;
+  text-transform: uppercase;
+  /* Space between sections */
+  strong {
+    color: #debf54;
+  }
+
 }
 
 /* Title and Subtitle Styling */
 .decade-container h2 {
-  font-size: 2rem;
-  color: #333; /* Grey tone */
-  margin-bottom: 10px;
+  font-size: 2.4rem;
+  color: #fecd1a;
+  /* Gold color for important text */
+  margin-bottom: 15px;
+  text-transform: uppercase;
+  font-weight: bold;
+  text-shadow: 0px 3px 6px rgba(0, 0, 0, 0.8);
+  /* Stronger text shadow */
 }
 
 .decade-container p {
-  font-size: 1.1rem;
-  color: #666; /* Grey tone */
-  margin-bottom: 20px;
+  font-size: 1.2rem;
+  /* Light purple text for subtler content */
+  margin-bottom: 25px;
+  text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.6);
+  /* Subtle shadow */
 }
 
 /* Grid Layout for Decades */
 .decades-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr); /* 4 columns for a consistent grid */
-  gap: 15px;
+  grid-template-columns: repeat(4, 1fr);
+  /* 4 columns for a consistent grid */
+  gap: 20px;
+  /* Increase spacing between buttons */
   justify-items: center;
   width: 100%;
 }
@@ -38,50 +58,67 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #f5f5f5; /* Light grey tone */
-  border: 2px solid #999; /* Grey tone */
-  border-radius: 8px;
+  background-color: #2c2c50;
+  /* Dark purple background */
+  border: 2px solid #fecd1a;
+  /* Gold border for emphasis */
+  border-radius: 10px;
   width: 100px;
   height: 50px;
-  font-size: 1rem;
+  font-size: 1.2rem;
   font-weight: bold;
-  color: #666; /* Grey tone */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  transition: transform 0.2s, background-color 0.2s, box-shadow 0.2s;
+  color: #b4b4ff;
+  /* Light purple text */
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.4);
+  /* Match the form button shadows */
+  transition: transform 0.3s, background-color 0.3s, box-shadow 0.3s, color 0.3s;
   cursor: pointer;
 }
 
 .decade-button:hover {
   transform: scale(1.1);
-  background-color: #f5f5f5; /* Light grey tone */
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-  color: #fff; /* White */
+  background-color: #b4b4ff;
+  /* Light purple hover background */
+  box-shadow: 0 5px 12px rgba(0, 0, 0, 0.5);
+  /* Bigger shadow */
+  color: black
+    /* Dark purple text on hover */
 }
 
 .decade-button.selected {
-  background-color: #999; /* Grey tone */
-  color: #fff;
-  border-color: #666; /* Grey tone */
-  box-shadow: 0 4px 10px rgba(153, 153, 153, 0.5); /* Grey tone */
+  background-color: #fecd1a;
+  /* Gold background for selected state */
+  color: #000;
+  /* Black text for contrast */
+  border-color: #ffffff;
+  /* White border for selected state */
+  box-shadow: 0 5px 12px rgba(255, 255, 255, 0.6);
+  /* Glow effect */
 }
 
 /* Responsive Design */
 @media only screen and (max-width: 600px) {
   .decades-grid {
-    grid-template-columns: repeat(3, 1fr); /* Adjust grid for smaller screens */
+    grid-template-columns: repeat(3, 1fr);
+    /* Adjust grid for smaller screens */
+    gap: 15px;
+    /* Adjust spacing */
   }
 
   .decade-button {
     width: 80px;
     height: 45px;
-    font-size: 0.9rem;
+    font-size: 1rem;
+    /* Adjust font size */
   }
 
   .decade-container h2 {
-    font-size: 1.6rem;
+    font-size: 2rem;
+    /* Adjust title size */
   }
 
   .decade-container p {
     font-size: 1rem;
+    /* Adjust subtitle size */
   }
 }

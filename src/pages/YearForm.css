@@ -4,83 +4,92 @@
   flex-direction: column;
   align-items: center;
   text-align: center;
-  padding: 30px;
-  border-radius: 10px;
+  padding: 40px;
+  border-radius: 15px;
   width: 100%;
   max-width: 800px;
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.6);
   box-sizing: border-box;
+  color: #fff;
+  margin-top: 20px;
+  text-transform: uppercase;
+
+  strong {
+    color: #debf54;
+  }
 }
 
-/* Title and Subtitle Styling */
 .year-container h2 {
-  font-size: 2rem;
-  color: #777777; /* Gray tone */
-  margin-bottom: 10px;
+  font-size: 2.4rem;
+  color: #fecd1a;
+  margin-bottom: 15px;
+  text-transform: uppercase;
+  font-weight: bold;
+  text-shadow: 0px 3px 6px rgba(0, 0, 0, 0.8);
 }
 
 .year-container p {
-  font-size: 1.1rem;
-  color: #999999; /* Gray tone */
-  margin-bottom: 20px;
+  font-size: 1.2rem;
+  margin-bottom: 25px;
+  text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.6);
 }
 
 /* Grid Layout for Years */
 .years-grid {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  /* 5 columns for balance */
-  gap: 15px;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
   justify-items: center;
   width: 100%;
 }
+
 /* Year Button Styling */
 .year-button {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #dddddd; /* Gray tone */
-  border: 2px solid #999999; /* Gray tone */
-  border-radius: 8px;
-  width: 80px;
+  background-color: #2c2c50;
+  border: 2px solid #fecd1a;
+  border-radius: 10px;
+  width: 100px;
   height: 50px;
-  font-size: 1rem;
+  font-size: 1.2rem;
   font-weight: bold;
-  color: #333333; /* Darker gray tone */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  transition: transform 0.2s, background-color 0.2s, box-shadow 0.2s, color 0.2s; /* Added color transition */
+  color: #b4b4ff;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.4);
+  transition: transform 0.3s, background-color 0.3s, box-shadow 0.3s, color 0.3s;
   cursor: pointer;
 }
 
 .year-button:hover {
   transform: scale(1.1);
-  background-color: #eeeeee; /* Light gray tone */
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-  color: #ffffff; /* White */
-  transition: transform 0.2s, background-color 0.2s, box-shadow 0.2s, color 0.2s; /* Added color transition */
+  background-color: #b4b4ff;
+  box-shadow: 0 5px 12px rgba(0, 0, 0, 0.5);
+  color: black;
 }
 
 .year-button.selected {
-  background-color: #777777; /* Gray tone */
-  color: #ffffff; /* White */
-  border-color: #666666; /* Dark gray tone */
-  box-shadow: 0 4px 10px rgba(156, 39, 176, 0.5);
+  background-color: #fecd1a;
+  color: #000;
+  border-color: #ffffff;
+  box-shadow: 0 5px 12px rgba(255, 255, 255, 0.6);
 }
 
 /* Responsive Design */
 @media only screen and (max-width: 600px) {
   .years-grid {
     grid-template-columns: repeat(3, 1fr);
-    /* Adjust grid for smaller screens */
+    gap: 15px;
   }
 
   .year-button {
-    width: 70px;
+    width: 80px;
     height: 45px;
-    font-size: 0.9rem;
+    font-size: 1rem;
   }
 
   .year-container h2 {
-    font-size: 1.6rem;
+    font-size: 2rem;
   }
 
   .year-container p {

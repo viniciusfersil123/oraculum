@@ -24,13 +24,13 @@ function App() {
       <div className="app-container"> {/* Wrapper to manage layout */}
         <Routes>
           <Route path="/" element={<PageWrapper title={title}><ZodiacGrid /></PageWrapper>} />
-          <Route path="/sign/:signName/day" element={<PageWrapper title="Sign Form"><SignForm /></PageWrapper>} />
-          <Route path="/sign/:signName/decade" element={<PageWrapper title="Decade Form"><DecadeForm /></PageWrapper>} />
-          <Route path="/sign/:signName/year" element={<PageWrapper title="Year Form"><YearForm /></PageWrapper>} />
-          <Route path="/sign/:signName/time" element={<PageWrapper title="Time Question"><TimeQuestion /></PageWrapper>} />
-          <Route path="/sign/:signName/hour" element={<PageWrapper title="Time Form"><TimeForm /></PageWrapper>} />
-          <Route path="/sign/:signName/city" element={<PageWrapper title="City Form"><CityForm /></PageWrapper>} />
-          <Route path="/sign/:signName/final" element={<PageWrapper title="Final Page"><FinalPage /></PageWrapper>} />
+          <Route path="/sign/:signName/day" element={<PageWrapper ><SignForm /></PageWrapper>} />
+          <Route path="/sign/:signName/decade" element={<PageWrapper ><DecadeForm /></PageWrapper>} />
+          <Route path="/sign/:signName/year" element={<PageWrapper ><YearForm /></PageWrapper>} />
+          <Route path="/sign/:signName/time" element={<PageWrapper ><TimeQuestion /></PageWrapper>} />
+          <Route path="/sign/:signName/hour" element={<PageWrapper ><TimeForm /></PageWrapper>} />
+          <Route path="/sign/:signName/city" element={<PageWrapper ><CityForm /></PageWrapper>} />
+          <Route path="/sign/:signName/final" element={<PageWrapper ><FinalPage /></PageWrapper>} />
         </Routes>
         <Footer /> {/* Add Footer here */}
       </div>
