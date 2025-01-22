@@ -1,59 +1,103 @@
-import React, { useEffect, useState } from 'react';
-import { useParams, useSearchParams, useNavigate } from 'react-router-dom';
-import './FinalPage.css';
+import React, { useEffect, useState } from "react";
+import { useParams, useSearchParams, useNavigate } from "react-router-dom";
+import "./FinalPage.css";
+
+// Map zodiac abbreviations to full names (case-insensitive)
+const zodiacSigns = {
+  ari: "Aries",
+  tau: "Taurus",
+  gem: "Gemini",
+  can: "Cancer",
+  leo: "Leo",
+  vir: "Virgo",
+  lib: "Libra",
+  sco: "Scorpio",
+  sag: "Sagittarius",
+  cap: "Capricorn",
+  aqu: "Aquarius",
+  pis: "Pisces",
+};
 
 function FinalPage() {
   const { signName } = useParams();
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
 
-  const [dailyPrediction, setDailyPrediction] = useState(null);
+  const [astroData, setAstroData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-
-  // Month names array
-  const monthNames = [
-    'January', 'February', 'March', 'April', 'May', 'June',
-    'July', 'August', 'September', 'October', 'November', 'December'
-  ];
-
-  // Retrieve parameters from the URL
-  const day = searchParams.get('day') || '26';
-  const year = searchParams.get('year') || '1955';
-  const month = monthNames[parseInt(searchParams.get('month') || '3', 10) - 1]; // Map month number to name
-  const hour = searchParams.get('hour');
-  const minute = searchParams.get('minute');
-  const period = searchParams.get('period');
-
-  const city = searchParams.get('city') || 'Unknown';
-  const state = searchParams.get('state') || 'Unknown';
-  const country = searchParams.get('country') || 'Unknown';
-
-  // Format time if valid
-  const formattedTime =
-    hour && minute && period
-      ? `${hour.padStart(2, '0')}:${minute.padStart(2, '0')} ${period}`
-      : 'Unknown';
 
   useEffect(() => {
     const fetchAstroData = async () => {
       try {
         setLoading(true);
 
-        // Simulate API call for daily prediction
-        const mockPrediction = {
-          prediction: `You will have an insightful day, ${signName}!`
+        // Extract parameters from URL
+        const day = searchParams.get("day");
+        const month = searchParams.get("month");
+        const year = searchParams.get("year");
+        const hour = searchParams.get("hour");
+        const minute = searchParams.get("minute");
+        const period = searchParams.get("period");
+        const latitude = searchParams.get("latitude");
+        const longitude = searchParams.get("longitude");
+
+        // Convert to 24-hour format
+        const isPM = period && period.toLowerCase() === "pm";
+        const hour24 = isPM && hour !== "12" ? parseInt(hour, 10) + 12 : hour;
+
+        const requestData = {
+          day,
+          month,
+          year,
+          hour: hour24,
+          minute,
+          latitude,
+          longitude,
         };
-        setDailyPrediction(mockPrediction);
+
+        console.log("Request Data:", requestData);
+
+        // Fetch astrolog output
+        const response = await fetch("http://localhost:5000/api/astrolog", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(requestData),
+        });
+
+        if (!response.ok) {
+          throw new Error("Failed to fetch astrolog data.");
+        }
+
+        const data = await response.json();
+        const rawOutput = data.rawOutput;
+
+        console.log("Raw Output from Astrolog:", rawOutput);
+
+        // Extract Ascendant
+        const asceLine = rawOutput.match(/Asce:\s+(\d+[A-Za-z]{3}\d+)/);
+        console.log("Matched Asce Line:", asceLine);
+
+        const ascendant = asceLine
+          ? zodiacSigns[asceLine[1].substring(2, 5).toLowerCase()] || "Unknown"
+          : "Unknown";
+
+        console.log("Parsed Ascendant:", ascendant);
+
+        setAstroData({
+          rawOutput,
+          ascendant,
+        });
       } catch (err) {
-        setError("Failed to fetch astrology data.");
+        console.error("Error fetching astrolog data:", err.message);
+        setError(err.message);
       } finally {
         setLoading(false);
       }
     };
 
     fetchAstroData();
-  }, [signName]);
+  }, [searchParams]);
 
   const handleReinit = () => {
     navigate("/");
@@ -61,57 +105,23 @@ function FinalPage() {
 
   return (
     <div className="final-container">
-      {/* Display YouTube Video */}
-      <div className="youtube-video">
-        <iframe
-          width="560"
-          height="315"
-          src="https://www.youtube.com/embed/USMohM34iMM?controls=0&modestbranding=1&showinfo=0"
-          title="YouTube video player"
-          frameBorder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowFullScreen
-        ></iframe>
-      </div>
-
-      {/* Displaying the URL parameters */}
-      <h3>Your Sign: {signName}</h3>
-      <h3>Date of Birth: {day} {month}, {year}</h3> {/* Month as a name */}
-      {hour && minute && period ? (
-        <h3>Time of Birth: {formattedTime}</h3> /* Display time only if valid */
-      ) : (
-        <h3>Time of Birth: Unknown</h3> /* Default to Unknown */
-      )}
-      <h3>City: {decodeURIComponent(city)}</h3>
-      <h3>State: {decodeURIComponent(state)}</h3>
-      <h3>Country: {decodeURIComponent(country)}</h3>
+      <h2>🌟 Astrology Insights 🌟</h2>
 
       {loading && <p>Loading your astrology insights...</p>}
-      {error && <p>{error}</p>}
+      {error && <p style={{ color: "red" }}>{error}</p>}
 
-      {/* Display the Daily Prediction */}
-      {dailyPrediction && (
-        <div className="daily-prediction">
-          <h3>🌟 Daily Prediction for {signName} 🌟</h3>
-          <p><strong>Prediction:</strong> {dailyPrediction.prediction}</p>
+      {astroData && (
+        <div className="astro-results">
+          <p><strong>Your Sign:</strong> {signName.charAt(0).toUpperCase() + signName.slice(1)}</p>
+          <p><strong>Ascendant:</strong> {astroData.ascendant}</p>
+          <p><strong>Raw Output:</strong></p>
+          <pre>{astroData.rawOutput}</pre>
         </div>
       )}
 
-      <button onClick={handleReinit} style={buttonStyle}>
-        Reinit
-      </button>
+      <button onClick={handleReinit}>Reinit</button>
     </div>
   );
 }
-
-const buttonStyle = {
-  marginTop: "20px",
-  padding: "10px 20px",
-  color: "white",
-  border: "none",
-  borderRadius: "5px",
-  fontSize: "16px",
-  cursor: "pointer",
-};
 
 export default FinalPage;

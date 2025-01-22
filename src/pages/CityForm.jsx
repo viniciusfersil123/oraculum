@@ -62,6 +62,8 @@ function CityForm() {
   const handleCityChange = (city) => {
     setSelectedCity(city);
     console.log("Selected City:", city.label);
+    console.log("City Latitude:", city.latitude);
+    console.log("City Longitude:", city.longitude);
   };
 
   const fetchStates = (countryId) => {
@@ -92,6 +94,8 @@ function CityForm() {
           value: city.geonameId,
           label: city.name,
           geonameId: city.geonameId,
+          latitude: city.lat,
+          longitude: city.lng,
         }));
         setCityOptions(cities);
       })
@@ -105,8 +109,10 @@ function CityForm() {
       return;
     }
 
+    const { latitude, longitude } = selectedCity;
+
     navigate(
-      `/sign/${signName}/final?day=${day}&month=${month}&decade=${decade}&year=${year}&hour=${hour}&minute=${minute}&period=${period}&city=${selectedCity.label}&state=${selectedState.label}&country=${selectedCountry.label}`
+      `/sign/${signName}/final?day=${day}&month=${month}&decade=${decade}&year=${year}&hour=${hour}&minute=${minute}&period=${period}&latitude=${latitude}&longitude=${longitude}`
     );
   };
 
