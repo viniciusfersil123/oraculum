@@ -1,51 +1,90 @@
-/* Final Page Specific Styling */
-.styled-box {
-  border: none;
-  box-sizing: border-box;
-  display: block;
-  font-family: 'Segoe UI', Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
-  height: 268px;
-  line-height: 24px;
-  text-size-adjust: 100%;
-  unicode-bidi: isolate;
-  width: 600px;
-  background-color: #2c2c50;
-  color: #b4b4ff;
-  border-radius: 15px;
+/* FinalPage Component Styling */
+.final-container {
+  font-family: 'Arial', sans-serif;
+  max-width: 600px;
+  margin: 40px auto;
   padding: 20px;
-  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.6);
+  background-color: #ffffff;
+  color: #333333;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  text-align: left;
 }
 
-.styled-box h2 {
-  font-size: 2.4rem;
-  color: #fecd1a;
-  margin-bottom: 10px;
-  text-transform: uppercase;
+.final-container h2 {
+  font-size: 1.8rem;
+  color: #6a24a8; /* Purple heading */
+  text-align: center;
+  margin-bottom: 20px;
   font-weight: bold;
-  text-shadow: 0px 3px 6px rgba(0, 0, 0, 0.8);
-  text-align: center;
 }
 
-.styled-box p {
-  font-size: 1.2rem;
-  color: #b4b4ff;
+.final-container p {
+  font-size: 1rem;
+  color: #333333;
+  line-height: 1.6;
+  margin-bottom: 15px;
+}
+
+.astro-results {
+  margin-top: 20px;
+}
+
+.astro-results h3 {
+  font-size: 1.4rem;
+  color: #6a24a8;
+  margin-bottom: 10px;
+}
+
+.astro-results ul {
+  list-style: none;
+  padding: 0;
+}
+
+.astro-results li {
+  font-size: 1rem;
   line-height: 1.5;
-  text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.6);
-  text-align: center;
+  margin-bottom: 10px;
+}
+
+button {
+  display: block;
+  width: 100%;
+  padding: 10px 15px;
+  font-size: 1rem;
+  color: #ffffff;
+  background-color: #6a24a8;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  text-transform: uppercase;
+  margin-top: 20px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
+}
+
+button:hover {
+  background-color: #55207e;
 }
 
 /* Responsive Design */
 @media only screen and (max-width: 600px) {
-  .styled-box {
-    width: 100%;
+  .final-container {
     padding: 15px;
   }
 
-  .styled-box h2 {
-    font-size: 2rem;
+  .final-container h2 {
+    font-size: 1.6rem;
   }
 
-  .styled-box p {
-    font-size: 1rem;
+  .astro-results h3 {
+    font-size: 1.2rem;
+  }
+
+  .astro-results li {
+    font-size: 0.9rem;
+  }
+
+  button {
+    font-size: 0.9rem;
   }
 }

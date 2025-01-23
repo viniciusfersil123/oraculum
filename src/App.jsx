@@ -31,9 +31,10 @@ function App() {
           <Route path="/sign/:signName/time" element={<PageWrapper ><TimeQuestion /></PageWrapper>} />
           <Route path="/sign/:signName/hour" element={<PageWrapper ><TimeForm /></PageWrapper>} />
           <Route path="/sign/:signName/city" element={<PageWrapper ><CityForm /></PageWrapper>} />
-          <Route path="/sign/:signName/final" element={<PageWrapper ><FinalPage /></PageWrapper>} />
-          <Route path="/sign/:signName/name" element={<PageWrapper ><NameForm /></PageWrapper>} /> {/* ✅ Add NameForm route */}
+          <Route path="/sign/:signName/final" element={<FinalPage />} /> {/* Remove PageWrapper here */}
+          <Route path="/sign/:signName/name" element={<PageWrapper ><NameForm /></PageWrapper>} />
         </Routes>
+
         <Footer /> {/* Add Footer here */}
       </div>
     </Router>

@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useSearchParams, useNavigate } from "react-router-dom";
-import "./FinalPage.css";
 
-// Map zodiac abbreviations to full names (case-insensitive)
 const zodiacSigns = {
   ari: "Aries",
   tau: "Taurus",
@@ -18,7 +16,6 @@ const zodiacSigns = {
   pis: "Pisces",
 };
 
-// Map planet abbreviations to full names
 const planetNames = {
   Sun: "Sun",
   Moon: "Moon",
@@ -32,7 +29,7 @@ const planetNames = {
   Plut: "Pluto",
   Nort: "North Node",
   Asce: "Ascendant",
-  Midh: "Midheaven", // Added Midheaven (Midh)
+  Midh: "Midheaven",
 };
 
 function FinalPage() {
@@ -44,7 +41,6 @@ function FinalPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  // Extract the name parameter from the URL
   const name = searchParams.get("name");
 
   useEffect(() => {
@@ -52,33 +48,16 @@ function FinalPage() {
       try {
         setLoading(true);
 
-        // Extract parameters from URL
-        const day = searchParams.get("day");
-        const month = searchParams.get("month");
-        const year = searchParams.get("year");
-        const hour = searchParams.get("hour");
-        const minute = searchParams.get("minute");
-        const period = searchParams.get("period");
-        const latitude = searchParams.get("latitude");
-        const longitude = searchParams.get("longitude");
-
-        // Convert to 24-hour format
-        const isPM = period && period.toLowerCase() === "pm";
-        const hour24 = isPM && hour !== "12" ? parseInt(hour, 10) + 12 : hour;
-
         const requestData = {
-          day,
-          month,
-          year,
-          hour: hour24,
-          minute,
-          latitude,
-          longitude,
+          day: searchParams.get("day"),
+          month: searchParams.get("month"),
+          year: searchParams.get("year"),
+          hour: searchParams.get("hour"),
+          minute: searchParams.get("minute"),
+          latitude: searchParams.get("latitude"),
+          longitude: searchParams.get("longitude"),
         };
 
-        console.log("Request Data:", requestData);
-
-        // Fetch astrolog output
         const response = await fetch("/api/astrolog", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -90,36 +69,24 @@ function FinalPage() {
         }
 
         const data = await response.json();
-        const rawOutput = data.rawOutput;
-
-        console.log("Raw Output from Astrolog:", rawOutput);
-
-        // Extract Planets, Ascendant, and Midheaven
         const planets = {};
-        rawOutput.split("\n").forEach((line) => {
+        data.rawOutput.split("\n").forEach((line) => {
           const match = line.match(
-            /^(Sun|Moon|Merc|Venu|Mars|Jupi|Satu|Uran|Nept|Plut|Asce|Midh):\s+\d+[A-Za-z]{3}\d+\s+.*?\[\s*([^\]]+?)\s*\]/
+            /^(Sun\s|Moon|Merc|Venu|Mars|Jupi|Satu|Uran|Nept|Plut|Asce|Midh):\s+(\d+)([A-Za-z]{3})(\d+)\s+.*?(R)?\s+.*?\[\s*([^\]]+?)\s*\]/
           );
           if (match) {
-            const [_, planet, house] = match;
-            const fullPlanetName = planetNames[planet] || planet;
-            const signMatch = line.match(/^(Sun|Moon|Merc|Venu|Mars|Jupi|Satu|Uran|Nept|Plut|Asce|Midh):\s+(\d+)([A-Za-z]{3})/);
-            const sign = signMatch ? zodiacSigns[signMatch[3].toLowerCase()] : "Unknown";
-            planets[fullPlanetName] = {
-              sign,
+            const [_, planet, degrees, signAbbr, minutes, retrograde, house] = match;
+            planets[planetNames[planet] || planet] = {
+              sign: zodiacSigns[signAbbr.toLowerCase()] || "Unknown",
+              degrees: `${degrees}°${minutes}'`,
               house: house.trim(),
+              retrograde: retrograde ? "Retrograde" : "Direct",
             };
           }
         });
 
-        console.log("Parsed Planets with Houses:", planets);
-
-        setAstroData({
-          rawOutput,
-          planets,
-        });
+        setAstroData({ planets });
       } catch (err) {
-        console.error("Error fetching astrolog data:", err.message);
         setError(err.message);
       } finally {
         setLoading(false);
@@ -129,40 +96,61 @@ function FinalPage() {
     fetchAstroData();
   }, [searchParams]);
 
-  const handleReinit = () => {
-    navigate("/");
-  };
+  const handleReinit = () => navigate("/");
 
   return (
-    <div className="final-container">
-      <h2>🌟 Astrology Insights 🌟</h2>
+    <div style={{ background: "white", width: "100vw", height: "100vh", position: "absolute" }}>
 
-      {loading && <p>Loading your astrology insights...</p>}
-      {error && <p style={{ color: "red" }}>{error}</p>}
+      <h1 className="text-3xl font-bold text-purple-800 mb-4 text-center">
+        Astrology Insights
+      </h1>
+
+      {loading && (
+        <p className="text-center text-lg text-purple-600">
+          Loading your astrology insights...
+        </p>
+      )}
+
+      {error && (
+        <p className="text-center text-red-500">
+          Error: {error}
+        </p>
+      )}
 
       {astroData && (
-        <div className="astro-results">
-          {name && <p><strong>Welcome, {name}!</strong></p>} {/* Display the user's name */}
-          <p><strong>Your Sign:</strong> {signName.charAt(0).toUpperCase() + signName.slice(1)}</p>
-
-          <h3>Moon Information</h3>
-          <p>
-            <strong>Sign:</strong> {astroData.planets.Moon?.sign} <br />
-            <strong>House:</strong> {astroData.planets.Moon?.house}
+        <div>
+          {name && (
+            <p className="text-xl text-gray-800 mb-4 text-center">
+              Welcome, <strong className="text-purple-800">{name}</strong>!
+            </p>
+          )}
+          <p className="text-lg text-gray-700 mb-6 text-center">
+            <strong>Your Sign:</strong>{" "}
+            {signName.charAt(0).toUpperCase() + signName.slice(1)}
           </p>
 
-          <h3>All Planets</h3>
-          <ul>
+          <h2 className="text-2xl font-semibold text-purple-800 mb-4">
+            Planetary Details
+          </h2>
+          <ul className="list-disc list-inside space-y-2 text-gray-700">
             {Object.entries(astroData.planets).map(([planet, details], index) => (
               <li key={index}>
-                <strong>{planet}:</strong> {details.sign}, {details.house}
+                <strong className="text-purple-800">{planet}</strong>: {details.sign},{" "}
+                {details.degrees}, House {details.house},{" "}
+                {details.retrograde}
               </li>
             ))}
           </ul>
         </div>
       )}
 
-      <button onClick={handleReinit}>Reinit</button>
+      <button
+        onClick={handleReinit}
+        className="mt-6 px-6 py-3 bg-purple-600 text-white rounded-lg shadow hover:bg-purple-700 transition"
+      >
+        Reinit
+      </button>
+
     </div>
   );
 }
