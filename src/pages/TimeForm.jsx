@@ -49,8 +49,8 @@ function TimeForm() {
                 </select>
             </div>
 
-            <button className="continue-button" onClick={handleContinue}>Continue</button>
-        </div>
+            <button className="continue-button" style={{ color: 'white' }} onClick={handleContinue}>Continue</button>
+        </div >
     );
 }
 

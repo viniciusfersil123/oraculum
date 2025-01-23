@@ -55,7 +55,7 @@
   height: 50px;
   font-size: 1.2rem;
   font-weight: bold;
-  color: #b4b4ff;
+  color: #fff;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.4);
   transition: transform 0.3s, background-color 0.3s, box-shadow 0.3s, color 0.3s;
   cursor: pointer;
@@ -65,7 +65,7 @@
   transform: scale(1.1);
   background-color: #b4b4ff;
   box-shadow: 0 5px 12px rgba(0, 0, 0, 0.5);
-  color: black;
+  color: #fecd1a;
 }
 
 .year-button.selected {

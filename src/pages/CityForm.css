@@ -1,3 +1,5 @@
+/* ========== Base Styles ========== */
+
 /* Container for the city form */
 .city-container {
   display: flex;
@@ -5,30 +7,31 @@
   align-items: center;
   text-align: center;
   padding: 40px;
-  border-radius: 15px;
+  margin-top: 20px;
   width: 100%;
   max-width: 600px;
-  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.6);
   box-sizing: border-box;
-  color: #fff;
-  margin-top: 20px;
+  border-radius: 15px;
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.6);
+  color: black;
   text-transform: uppercase;
 }
 
-/* Title Styling */
+/* ========== Title Styling ========== */
+
 .city-container h2 {
+  margin-bottom: 20px;
   font-size: 2.4rem;
-  color: #fecd1a;
-  margin-bottom: 10px;
-  text-transform: uppercase;
   font-weight: bold;
+  color: #fecd1a;
+  text-transform: uppercase;
   text-shadow: 0px 3px 6px rgba(0, 0, 0, 0.8);
 }
 
 /* Subtitle Styling */
 .city-container p {
   font-size: 1.2rem;
-  color: #b4b4ff;
+  color: #fecd1a;
   margin-bottom: 20px;
   line-height: 1.5;
   text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.6);
@@ -38,7 +41,7 @@
 .city-container label {
   font-size: 1rem;
   font-weight: bold;
-  color: #b4b4ff;
+  color: #fecd1a;
   margin-bottom: 10px;
 }
 
@@ -51,7 +54,7 @@
   border: 2px solid #fecd1a;
   border-radius: 10px;
   background-color: #2c2c50;
-  color: #b4b4ff;
+  color: black;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.4);
   transition: border-color 0.3s, box-shadow 0.3s;
 }
@@ -70,6 +73,8 @@
   text-shadow: 0px 1px 2px rgba(0, 0, 0, 0.5);
 }
 
+/* ========== Button Styling ========== */
+
 /* Continue Button Styling */
 .continue-button {
   width: 150px;
@@ -80,7 +85,7 @@
   border-radius: 10px;
   font-size: 1.2rem;
   font-weight: bold;
-  color: #b4b4ff;
+  color: #fff;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.4);
   cursor: pointer;
   transition: transform 0.3s, background-color 0.3s, box-shadow 0.3s, color 0.3s;
@@ -90,7 +95,7 @@
   transform: scale(1.1);
   background-color: #b4b4ff;
   box-shadow: 0 5px 12px rgba(0, 0, 0, 0.5);
-  color: black;
+  color: #413302;
 }
 
 .continue-button:active {
@@ -107,7 +112,8 @@
   cursor: not-allowed;
 }
 
-/* Responsive Design */
+/* ========== Responsive Design ========== */
+
 @media only screen and (max-width: 600px) {
   .city-container h2 {
     font-size: 2rem;
@@ -126,4 +132,37 @@
     font-size: 1rem;
     padding: 8px 16px;
   }
+}
+
+/* ========== Select Box Styling ========== */
+
+/* Styling for the select dropdown */
+.city-container select {
+  width: 100%;
+  max-width: 400px;
+  padding: 10px;
+  font-size: 1.2rem;
+  border: 2px solid #fecd1a;
+  border-radius: 10px;
+  background-color: #2c2c50;
+  color: #fecd1a;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.4);
+  appearance: none;
+  /* Removes default arrow for consistent styling */
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+/* Change focus styles for the select box */
+.city-container select:focus {
+  border-color: #ffffff;
+  outline: none;
+  box-shadow: 0 5px 12px rgba(255, 255, 255, 0.5);
+}
+
+/* Styling for the options */
+.city-container select option {
+  color: black;
+  /* Ensures black font for options */
+  background-color: #ffffff;
+  /* Sets a white background for readability */
 }

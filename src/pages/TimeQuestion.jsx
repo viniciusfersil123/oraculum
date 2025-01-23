@@ -24,8 +24,8 @@ function DayQuestion() {
   return (
     <div className="day-question">
       <h2>Can you tell me your time of birth?</h2>
-      <button onClick={handleYes}>Yes</button>
-      <button onClick={handleNo}>No</button>
+      <button className="time-button" onClick={handleYes}>Yes</button>
+      <button className="time-button" onClick={handleNo}>No</button>
     </div>
   );
 }

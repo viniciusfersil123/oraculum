@@ -67,7 +67,7 @@
   height: 50px;
   font-size: 1.2rem;
   font-weight: bold;
-  color: #b4b4ff;
+  color: #fff; 
   /* Light purple text */
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.4);
   /* Match the form button shadows */
@@ -81,7 +81,7 @@
   /* Light purple hover background */
   box-shadow: 0 5px 12px rgba(0, 0, 0, 0.5);
   /* Bigger shadow */
-  color: black
+  color: #fecd1a;
     /* Dark purple text on hover */
 }
 
