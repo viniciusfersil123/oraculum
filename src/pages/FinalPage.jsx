@@ -99,58 +99,75 @@ function FinalPage() {
   const handleReinit = () => navigate("/");
 
   return (
-    <div style={{ background: "white", width: "100vw", height: "100vh", position: "absolute" }}>
-
-      <h1 className="text-3xl font-bold text-purple-800 mb-4 text-center">
-        Astrology Insights
-      </h1>
-
+    <div
+      className="w-screen h-screen bg-gradient-to-b from-purple-100 via-white to-purple-200 p-8 overflow-y-auto"
+      style={{ position: "absolute", top: 0, left: 0 }}
+    >
       {loading && (
-        <p className="text-center text-lg text-purple-600">
+        <p className="text-center text-lg text-purple-600 mt-6">
           Loading your astrology insights...
         </p>
       )}
 
       {error && (
-        <p className="text-center text-red-500">
-          Error: {error}
-        </p>
+        <p className="text-center text-red-500 mt-6">Error: {error}</p>
       )}
 
       {astroData && (
-        <div>
+        <div className="max-w-4xl mx-auto mt-10 space-y-10">
           {name && (
-            <p className="text-xl text-gray-800 mb-4 text-center">
-              Welcome, <strong className="text-purple-800">{name}</strong>!
-            </p>
+            <h1 style={{ textShadow: 0 }}>
+              Why you act the way you act,{" "}
+              <strong className="text-purple-800 capitalize">{name}</strong>!
+            </h1>
           )}
-          <p className="text-lg text-gray-700 mb-6 text-center">
+          <p style={{ marginTop: "10px" }} className="text-lg text-center text-gray-700 mt-0">
             <strong>Your Sign:</strong>{" "}
             {signName.charAt(0).toUpperCase() + signName.slice(1)}
           </p>
 
-          <h2 className="text-2xl font-semibold text-purple-800 mb-4">
-            Planetary Details
-          </h2>
-          <ul className="list-disc list-inside space-y-2 text-gray-700">
-            {Object.entries(astroData.planets).map(([planet, details], index) => (
-              <li key={index}>
-                <strong className="text-purple-800">{planet}</strong>: {details.sign},{" "}
-                {details.degrees}, House {details.house},{" "}
-                {details.retrograde}
-              </li>
-            ))}
-          </ul>
+          {Object.entries(astroData.planets).map(([planet, details], index) => (
+            <section
+              key={index}
+              style={{ display: "flex", alignItems: "baseline", gap: "1rem" }}
+              className="p-8 bg-white rounded-lg shadow-md border-l-4 border-purple-500"
+            >
+              <h2 className="text-2xl font-semibold text-purple-700">
+                {planet}
+              </h2>
+              <p className="text-gray-600 mt-2">
+                <strong>Sign:</strong> {details.sign}
+              </p>
+              <p className="text-gray-600">
+                <strong>Degrees:</strong> {details.degrees}
+              </p>
+              <p className="text-gray-600">
+                <strong>House:</strong> {details.house}
+              </p>
+              <p className="text-gray-600">
+                <strong>Motion:</strong> {details.retrograde}
+              </p>
+              <p className="text-gray-500 mt-4">
+                Each planet influences you differently.{" "}
+                <span className="italic">
+                  {planet} guides your {details.house} house in surprising ways.
+                </span>{" "}
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Discover
+                its impact on your personality and growth!
+              </p>
+            </section>
+          ))}
         </div>
       )}
 
-      <button
-        onClick={handleReinit}
-        className="mt-6 px-6 py-3 bg-purple-600 text-white rounded-lg shadow hover:bg-purple-700 transition"
-      >
-        Reinit
-      </button>
-
+      <div className="text-center mt-10">
+        <button
+          onClick={handleReinit}
+          className="px-8 py-3 bg-purple-600 text-white font-semibold rounded-lg shadow-lg hover:bg-purple-700 transition"
+        >
+          Reinit
+        </button>
+      </div>
     </div>
   );
 }
