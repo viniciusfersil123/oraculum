@@ -44,6 +44,9 @@ function FinalPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
+  // Extract the name parameter from the URL
+  const name = searchParams.get("name");
+
   useEffect(() => {
     const fetchAstroData = async () => {
       try {
@@ -92,24 +95,24 @@ function FinalPage() {
         console.log("Raw Output from Astrolog:", rawOutput);
 
         // Extract Planets, Ascendant, and Midheaven
-        const planetMatches = rawOutput.match(/(Sun\s+:|Moon|Merc|Venu|Mars|Jupi|Satu|Uran|Nept|Plut|Nort|Asce|Midh):\s+([A-Za-z0-9]+)/g);
         const planets = {};
+        rawOutput.split("\n").forEach((line) => {
+          const match = line.match(
+            /^(Sun|Moon|Merc|Venu|Mars|Jupi|Satu|Uran|Nept|Plut|Asce|Midh):\s+\d+[A-Za-z]{3}\d+\s+.*?\[\s*([^\]]+?)\s*\]/
+          );
+          if (match) {
+            const [_, planet, house] = match;
+            const fullPlanetName = planetNames[planet] || planet;
+            const signMatch = line.match(/^(Sun|Moon|Merc|Venu|Mars|Jupi|Satu|Uran|Nept|Plut|Asce|Midh):\s+(\d+)([A-Za-z]{3})/);
+            const sign = signMatch ? zodiacSigns[signMatch[3].toLowerCase()] : "Unknown";
+            planets[fullPlanetName] = {
+              sign,
+              house: house.trim(),
+            };
+          }
+        });
 
-        if (planetMatches) {
-          planetMatches.forEach((match) => {
-            const [_, planet, location] = match.match(/(Sun\s+:|Moon|Merc|Venu|Mars|Jupi|Satu|Uran|Nept|Plut|Nort|Asce|Midh):\s+([A-Za-z0-9]+)/);
-            const trimmedPlanet = planet.trim().replace(/\s+:$/, ""); // Handle extra space and colon
-            const fullPlanetName = planetNames[trimmedPlanet] || trimmedPlanet;
-            planets[fullPlanetName] = zodiacSigns[location.replace(/\d+/g, "").toLowerCase()] || "Unknown";
-
-            // Debugging specific to Sun and Midheaven
-            if (trimmedPlanet === "Sun" || trimmedPlanet === "Midh") {
-              console.log(`Debug ${trimmedPlanet}:`, { trimmedPlanet, location, sign: planets[fullPlanetName] });
-            }
-          });
-        }
-
-        console.log("Parsed Planets:", planets);
+        console.log("Parsed Planets with Houses:", planets);
 
         setAstroData({
           rawOutput,
@@ -139,11 +142,21 @@ function FinalPage() {
 
       {astroData && (
         <div className="astro-results">
+          {name && <p><strong>Welcome, {name}!</strong></p>} {/* Display the user's name */}
           <p><strong>Your Sign:</strong> {signName.charAt(0).toUpperCase() + signName.slice(1)}</p>
-          <p><strong>Planets, Ascendant, and Midheaven:</strong></p>
+
+          <h3>Moon Information</h3>
+          <p>
+            <strong>Sign:</strong> {astroData.planets.Moon?.sign} <br />
+            <strong>House:</strong> {astroData.planets.Moon?.house}
+          </p>
+
+          <h3>All Planets</h3>
           <ul>
-            {Object.entries(astroData.planets).map(([planet, sign], index) => (
-              <li key={index}><strong>{planet}:</strong> {sign}</li>
+            {Object.entries(astroData.planets).map(([planet, details], index) => (
+              <li key={index}>
+                <strong>{planet}:</strong> {details.sign}, {details.house}
+              </li>
             ))}
           </ul>
         </div>

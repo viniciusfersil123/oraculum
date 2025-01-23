@@ -104,17 +104,19 @@ function CityForm() {
 
   const handleContinue = () => {
     if (!selectedCountry || !selectedState || !selectedCity) {
-      setError("Please select a country, state, and city.");
-      console.error("Error: Incomplete selection.");
-      return;
+        setError("Please select a country, state, and city.");
+        console.error("Error: Incomplete selection.");
+        return;
     }
 
     const { latitude, longitude } = selectedCity;
 
+    // Navigate to NameForm with query parameters
     navigate(
-      `/sign/${signName}/final?day=${day}&month=${month}&decade=${decade}&year=${year}&hour=${hour}&minute=${minute}&period=${period}&latitude=${latitude}&longitude=${longitude}`
+        `/sign/${signName}/name?day=${day}&month=${month}&decade=${decade}&year=${year}&hour=${hour}&minute=${minute}&period=${period}&latitude=${latitude}&longitude=${longitude}`
     );
-  };
+};
+
 
   return (
     <div className="city-container">

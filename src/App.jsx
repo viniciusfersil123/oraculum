@@ -5,10 +5,11 @@ import DecadeForm from "./pages/DecadeForm";
 import YearForm from "./pages/YearForm";
 import TimeQuestion from "./pages/TimeQuestion";
 import TimeForm from "./pages/TimeForm";
-import CityForm from "./pages/CityForm";  // ✅ Import CityForm
+import CityForm from "./pages/CityForm";
+import NameForm from "./pages/NameForm"; // ✅ Import NameForm
 import PageWrapper from "./components/PageWrapper";
 import FinalPage from "./pages/FinalPage";
-import Footer from "./components/Footer";  // ✅ Import Footer
+import Footer from "./components/Footer";
 import "./App.css";
 
 let title = (
@@ -31,6 +32,7 @@ function App() {
           <Route path="/sign/:signName/hour" element={<PageWrapper ><TimeForm /></PageWrapper>} />
           <Route path="/sign/:signName/city" element={<PageWrapper ><CityForm /></PageWrapper>} />
           <Route path="/sign/:signName/final" element={<PageWrapper ><FinalPage /></PageWrapper>} />
+          <Route path="/sign/:signName/name" element={<PageWrapper ><NameForm /></PageWrapper>} /> {/* ✅ Add NameForm route */}
         </Routes>
         <Footer /> {/* Add Footer here */}
       </div>
