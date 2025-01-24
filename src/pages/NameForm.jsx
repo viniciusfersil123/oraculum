@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import './NameForm.css';
+import config from './nameForm.json';
 
 const NameForm = () => {
     const [name, setName] = useState('');
@@ -33,8 +34,8 @@ const NameForm = () => {
 
     return (
         <form className="name-container" onSubmit={handleSubmit}>
-            <h2>Enter Your Name</h2>
-            <label htmlFor="name-input">Name</label>
+            <h2>{config.NameCTA}</h2>
+            <label htmlFor="name-input">{config.title}</label>
             <input
                 id="name-input"
                 type="text"

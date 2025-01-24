@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import './YearForm.css';
+import config from './yearForm.json';
 
 function YearForm() {
   const { signName } = useParams();
@@ -21,7 +22,7 @@ function YearForm() {
 
   return (
     <div className="year-container">
-      <p>Select the <strong><u>year you were born</u></strong></p>
+      <h1>{config.title}</h1>
       <div className="years-grid">
         {years.map((year) => (
           <button

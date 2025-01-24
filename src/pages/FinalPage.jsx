@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useSearchParams, useNavigate } from "react-router-dom";
+import config from "./finalPage.json"
 
 const zodiacSigns = {
   ari: "Aries",
@@ -117,7 +118,7 @@ function FinalPage() {
         <div className="max-w-4xl mx-auto mt-10 space-y-10">
           {name && (
             <h1 style={{ textShadow: 'none', border: 'black' }} className="text-3xl font-semibold text-purple-800">
-              Why you act the way you act, {" "}
+              {config.introText}
               <strong style={{ textShadow: '1px 1px black', border: 'black' }}>{name}?</strong>
             </h1>
           )}
@@ -131,7 +132,7 @@ function FinalPage() {
             <iframe
               width="560"
               height="315"
-              src="https://www.youtube.com/embed/ovmLL_Q6ipI?controls=0"
+              src={config.youtubeLink}
               title="Why You Act the Way You Act"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowFullScreen
@@ -163,12 +164,7 @@ function FinalPage() {
                 <strong>Motion:</strong> {details.retrograde}
               </p>
               <p className="text-gray-500 mt-4">
-                Each planet influences you differently. {" "}
-                <span className="italic">
-                  {planet} guides your {details.house} house in surprising ways.
-                </span>{" "}
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Discover
-                its impact on your personality and growth!
+                {config.planetTexts[planet]}
               </p>
             </section>
           ))}

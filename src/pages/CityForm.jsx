@@ -3,6 +3,7 @@ import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import axios from "axios";
 import debounce from "lodash/debounce";
 import "./CityForm.css";
+import config from "./cityForm.json";
 
 function CityForm() {
   const navigate = useNavigate();
@@ -171,7 +172,7 @@ function CityForm() {
   return (
     <div className="city-container">
       <p>
-        Enter the <strong><u>place you were born</u></strong> or select the closest bigger city.
+        {config.CityCTA}
       </p>
 
       <label htmlFor="country-select">Country</label>

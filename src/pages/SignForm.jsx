@@ -1,6 +1,7 @@
 import React, { useState, useMemo } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import './SignForm.css';
+import config from './signForm.json';
 
 function SignForm() {
   const { signName } = useParams();
@@ -63,7 +64,7 @@ function SignForm() {
   return (
     <div className="form-container">
       <div className='form-header'>
-        <p>Select the <strong><u>day you were born</u></strong></p>
+        {config.title}
       </div>
       {signMonths.map((monthData) => (
         <div key={monthData.month} className="month-section">

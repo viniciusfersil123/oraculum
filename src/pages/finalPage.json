@@ -1,0 +1,18 @@
+{
+    "introText": "Why you act the way you act,",
+    "youtubeLink": "https://www.youtube.com/embed/ovmLL_Q6ipI?controls=0",
+    "planetTexts": {
+        "Sun ": "The Sun represents your core essence and vitality. Discover its power in shaping your identity.",
+        "Moon": "The Moon influences your emotional world and inner needs. Explore its connection to your intuition.",
+        "Mercury": "Mercury governs your communication and thought process. Learn how it impacts your intellect.",
+        "Venus": "Venus shapes your values, love, and aesthetics. Unveil its role in your relationships.",
+        "Mars": "Mars drives your action, energy, and ambition. Harness its force to pursue your passions.",
+        "Jupiter": "Jupiter expands your horizons, bringing growth and opportunities. Embrace its blessings.",
+        "Saturn": "Saturn structures your discipline and long-term goals. Reflect on its wisdom and lessons.",
+        "Uranus": "Uranus sparks innovation and change. Discover its influence on your individuality.",
+        "Neptune": "Neptune enhances imagination and spirituality. Dive into its dreamlike inspirations.",
+        "Pluto": "Pluto represents transformation and power. Unearth its depth in your journey of renewal.",
+        "Ascendant": "The Ascendant is your first impression and outer self. Explore its role in your identity.",
+        "Midheaven": "The Midheaven is your career and public image. Discover its impact on your professional life."
+    }
+}

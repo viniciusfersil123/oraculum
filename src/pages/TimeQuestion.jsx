@@ -2,6 +2,7 @@
 import React from "react";
 import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import "./TimeQuestion.css";
+import config from "./timeQuestion.json";
 
 function DayQuestion() {
   const navigate = useNavigate();
@@ -23,7 +24,7 @@ function DayQuestion() {
 
   return (
     <div className="day-question">
-      <h2>Can you tell me your time of birth?</h2>
+      <h2>{config.question}</h2>
       <button className="time-button" onClick={handleYes}>Yes</button>
       <button className="time-button" onClick={handleNo}>No</button>
     </div>

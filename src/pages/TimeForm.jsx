@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import './TimeForm.css';
+import config from './timeForm.json';
 
 function TimeForm() {
     const { signName } = useParams();
@@ -26,14 +27,13 @@ function TimeForm() {
     return (
         <div className="time-container">
             <p>
-                Pick the <strong><u>time you were born</u></strong> to see your chances of getting rich <br />
-                <em>(An estimate will work)</em>
+                {config.title}
             </p>
 
             <div className="time-selectors">
                 <div className="dropdown-wrapper">
-                    <select 
-                        value={hour} 
+                    <select
+                        value={hour}
                         onChange={(e) => setHour(e.target.value)}
                         className="dropdown"
                     >
@@ -44,9 +44,9 @@ function TimeForm() {
                 </div>
 
                 <div className="dropdown-wrapper">
-                    <select 
-                        value={minute} 
-                        onChange={(e) => setMinute(e.target.value)} 
+                    <select
+                        value={minute}
+                        onChange={(e) => setMinute(e.target.value)}
                         className="dropdown-scrollable"
                     >
                         {minutes.map((m) => (
@@ -56,8 +56,8 @@ function TimeForm() {
                 </div>
 
                 <div className="dropdown-wrapper">
-                    <select 
-                        value={period} 
+                    <select
+                        value={period}
                         onChange={(e) => setPeriod(e.target.value)}
                         className="dropdown"
                     >

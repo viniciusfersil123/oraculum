@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import './DecadeForm.css';
+import config from './decadeForm.json';
 
 function DecadeForm() {
   const { signName } = useParams();
@@ -19,12 +20,12 @@ function DecadeForm() {
     setSelectedDecade(decade);
     navigate(`/sign/${signName}/year?day=${day}&month=${month}&decade=${decade}`);  // ✅ Navigate with day, month, and decade
   };
-  
+
 
 
   return (
     <div className="decade-container">
-      <p>Select the <strong><u>decade you were born</u></strong></p>
+      <h1>{config.title}</h1>
       <div className="decades-grid">
         {decades.map((decade) => (
           <button

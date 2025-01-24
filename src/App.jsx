@@ -11,11 +11,11 @@ import PageWrapper from "./components/PageWrapper";
 import FinalPage from "./pages/FinalPage";
 import Footer from "./components/Footer";
 import "./App.css";
+import config from "./pages/zodiacGrid.json";
 
 let title = (
   <h1>
-    <strong>93% OF PEOPLE</strong> DON'T KNOW THIS TRUTH
-    ABOUT THEIR ZODIAC SIGN. <strong>DO YOU?</strong>
+    {config.CTA}
   </h1>
 );
 
