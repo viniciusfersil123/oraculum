@@ -116,15 +116,30 @@ function FinalPage() {
       {astroData && (
         <div className="max-w-4xl mx-auto mt-10 space-y-10">
           {name && (
-            <h1 style={{ textShadow: 'none', border: 'black'}} className="text-3xl font-semibold text-purple-800">
-              Why you act the way you act,{" "}
-              <strong style={{textShadow: '1px 1px black', border: 'black'}}>{name}?</strong>
+            <h1 style={{ textShadow: 'none', border: 'black' }} className="text-3xl font-semibold text-purple-800">
+              Why you act the way you act, {" "}
+              <strong style={{ textShadow: '1px 1px black', border: 'black' }}>{name}?</strong>
             </h1>
           )}
           <p style={{ marginTop: "10px" }} className="text-lg text-center text-gray-700 mt-0">
             <strong>Your Sign:</strong>{" "}
             {signName.charAt(0).toUpperCase() + signName.slice(1)}
           </p>
+
+          <div className="text-center mt-10">
+
+            <iframe
+              width="560"
+              height="315"
+              src="https://www.youtube.com/embed/ovmLL_Q6ipI?controls=0"
+              title="Why You Act the Way You Act"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+              className="mx-auto"
+            ></iframe>
+
+          </div>
+
 
           {Object.entries(astroData.planets).map(([planet, details], index) => (
             <section
@@ -148,7 +163,7 @@ function FinalPage() {
                 <strong>Motion:</strong> {details.retrograde}
               </p>
               <p className="text-gray-500 mt-4">
-                Each planet influences you differently.{" "}
+                Each planet influences you differently. {" "}
                 <span className="italic">
                   {planet} guides your {details.house} house in surprising ways.
                 </span>{" "}
@@ -159,6 +174,7 @@ function FinalPage() {
           ))}
         </div>
       )}
+
 
       <div className="text-center mt-10">
         <button
