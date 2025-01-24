@@ -38,7 +38,7 @@ function CityForm() {
 
     axios
       .get(
-        `https://secure.geonames.org/searchJSON?featureClass=A&featureCode=PCLI&maxRows=10&name_startsWith=${searchQuery}&username=${GEO_USERNAME}`
+        `https://secure.geonames.org/searchJSON?featureClass=A&featureCode=PCLI&name_startsWith=${searchQuery}&username=${GEO_USERNAME}`
       )
       .then((response) => {
         const countries = response.data.geonames.map((country) => ({
@@ -56,10 +56,12 @@ function CityForm() {
 
     axios
       .get(
-        `https://secure.geonames.org/childrenJSON?geonameId=${countryId}&name_startsWith=${searchQuery}&username=${GEO_USERNAME}`
+        `https://secure.geonames.org/childrenJSON?geonameId=${countryId}&username=${GEO_USERNAME}`
       )
       .then((response) => {
-        const states = response.data.geonames.map((state) => ({
+        const states = response.data.geonames.filter((state) =>
+          state.name.toLowerCase().startsWith(searchQuery.toLowerCase())
+        ).map((state) => ({
           value: state.adminCode1,
           label: state.name,
           geonameId: state.geonameId,
@@ -74,7 +76,7 @@ function CityForm() {
 
     axios
       .get(
-        `https://secure.geonames.org/searchJSON?country=${countryCode}&adminCode1=${stateCode}&featureClass=P&maxRows=10&name_startsWith=${searchQuery}&username=${GEO_USERNAME}`
+        `https://secure.geonames.org/searchJSON?country=${countryCode}&adminCode1=${stateCode}&featureClass=P&name_startsWith=${searchQuery}&username=${GEO_USERNAME}`
       )
       .then((response) => {
         const cities = response.data.geonames.map((city) => ({

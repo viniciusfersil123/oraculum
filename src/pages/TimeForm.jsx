@@ -21,7 +21,7 @@ function TimeForm() {
     };
 
     const hours = Array.from({ length: 12 }, (_, i) => String(i + 1).padStart(2, '0'));
-    const minutes = ['00', '15', '30', '45'];
+    const minutes = Array.from({ length: 60 }, (_, i) => String(i).padStart(2, '0'));
 
     return (
         <div className="time-container">
@@ -31,26 +31,44 @@ function TimeForm() {
             </p>
 
             <div className="time-selectors">
-                <select value={hour} onChange={(e) => setHour(e.target.value)}>
-                    {hours.map((h) => (
-                        <option key={h} value={h}>{h}</option>
-                    ))}
-                </select>
+                <div className="dropdown-wrapper">
+                    <select 
+                        value={hour} 
+                        onChange={(e) => setHour(e.target.value)}
+                        className="dropdown"
+                    >
+                        {hours.map((h) => (
+                            <option key={h} value={h}>{h}</option>
+                        ))}
+                    </select>
+                </div>
 
-                <select value={minute} onChange={(e) => setMinute(e.target.value)}>
-                    {minutes.map((m) => (
-                        <option key={m} value={m}>{m}</option>
-                    ))}
-                </select>
+                <div className="dropdown-wrapper">
+                    <select 
+                        value={minute} 
+                        onChange={(e) => setMinute(e.target.value)} 
+                        className="dropdown-scrollable"
+                    >
+                        {minutes.map((m) => (
+                            <option key={m} value={m}>{m}</option>
+                        ))}
+                    </select>
+                </div>
 
-                <select value={period} onChange={(e) => setPeriod(e.target.value)}>
-                    <option value="AM">AM</option>
-                    <option value="PM">PM</option>
-                </select>
+                <div className="dropdown-wrapper">
+                    <select 
+                        value={period} 
+                        onChange={(e) => setPeriod(e.target.value)}
+                        className="dropdown"
+                    >
+                        <option value="AM">AM</option>
+                        <option value="PM">PM</option>
+                    </select>
+                </div>
             </div>
 
-            <button className="continue-button" style={{ color: 'white' }} onClick={handleContinue}>Continue</button>
-        </div >
+            <button className="continue-button" onClick={handleContinue}>Continue</button>
+        </div>
     );
 }
 

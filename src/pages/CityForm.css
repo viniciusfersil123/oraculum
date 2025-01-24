@@ -167,7 +167,7 @@
   /* Sets a white background for readability */
 }
 
-/* ========== Dropdown Styling ========== */
+/* Dropdown Styling */
 .dropdown {
   width: 100%;
   max-width: 400px;
@@ -178,11 +178,13 @@
   border: 2px solid #fecd1a;
   border-radius: 8px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
-  overflow-y: auto;
-  max-height: 200px;
-  z-index: 1000; /* Ensures dropdown appears above other elements */
+  overflow-y: auto; /* Permite scroll quando a lista excede a altura */
+  max-height: 200px; /* Define a altura máxima do dropdown */
+  height: 100%;
+  z-index: 1000; /* Assegura que o dropdown fique acima de outros elementos */
 }
 
+/* Dropdown Items */
 .dropdown-item {
   padding: 10px;
   font-size: 1.1rem;
@@ -193,7 +195,7 @@
 }
 
 .dropdown-item:last-child {
-  border-bottom: none; /* Remove border for the last item */
+  border-bottom: none; /* Remove a borda inferior do último item */
 }
 
 .dropdown-item:hover {

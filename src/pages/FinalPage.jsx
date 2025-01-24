@@ -101,7 +101,7 @@ function FinalPage() {
   return (
     <div
       className="w-screen h-screen bg-gradient-to-b from-purple-100 via-white to-purple-200 p-8 overflow-y-auto"
-      style={{ position: "absolute", top: 0, left: 0 }}
+      style={{ position: "absolute", top: 0, left: 0, boxShadow: "0 0 10px rgba(0, 0, 0, 0.2)" }}
     >
       {loading && (
         <p className="text-center text-lg text-purple-600 mt-6">
@@ -116,9 +116,9 @@ function FinalPage() {
       {astroData && (
         <div className="max-w-4xl mx-auto mt-10 space-y-10">
           {name && (
-            <h1 style={{ textShadow: 0 }}>
+            <h1 style={{ textShadow: 'none', border: 'black'}} className="text-3xl font-semibold text-purple-800">
               Why you act the way you act,{" "}
-              <strong className="text-purple-800 capitalize">{name}</strong>!
+              <strong style={{textShadow: '1px 1px black', border: 'black'}}>{name}?</strong>
             </h1>
           )}
           <p style={{ marginTop: "10px" }} className="text-lg text-center text-gray-700 mt-0">
@@ -129,7 +129,7 @@ function FinalPage() {
           {Object.entries(astroData.planets).map(([planet, details], index) => (
             <section
               key={index}
-              style={{ display: "flex", alignItems: "baseline", gap: "1rem" }}
+              style={{ display: "flex", alignItems: "baseline", gap: "1rem", boxShadow: "0 2px 5px rgba(0, 0, 0, 0.1)" }}
               className="p-8 bg-white rounded-lg shadow-md border-l-4 border-purple-500"
             >
               <h2 className="text-2xl font-semibold text-purple-700">
