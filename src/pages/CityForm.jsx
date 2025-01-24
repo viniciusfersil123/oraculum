@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { useNavigate, useParams, useSearchParams } from "react-router-dom";
-import Select from "react-select";
 import axios from "axios";
+import debounce from "lodash/debounce";
 import "./CityForm.css";
 
 function CityForm() {
@@ -20,57 +20,44 @@ function CityForm() {
   const [selectedCountry, setSelectedCountry] = useState(null);
   const [selectedState, setSelectedState] = useState(null);
   const [selectedCity, setSelectedCity] = useState(null);
+
   const [countryOptions, setCountryOptions] = useState([]);
   const [stateOptions, setStateOptions] = useState([]);
   const [cityOptions, setCityOptions] = useState([]);
+
+  const [countrySearch, setCountrySearch] = useState("");
+  const [stateSearch, setStateSearch] = useState("");
+  const [citySearch, setCitySearch] = useState("");
+
   const [error, setError] = useState("");
 
   const GEO_USERNAME = import.meta.env.VITE_GEONAMES_USERNAME;
 
-  // Fetch countries
-  useEffect(() => {
+  const fetchCountries = (searchQuery = "") => {
+    if (!searchQuery) return;
+
     axios
-      .get(`https://secure.geonames.org/countryInfoJSON?username=${GEO_USERNAME}`)
+      .get(
+        `https://secure.geonames.org/searchJSON?featureClass=A&featureCode=PCLI&maxRows=10&name_startsWith=${searchQuery}&username=${GEO_USERNAME}`
+      )
       .then((response) => {
         const countries = response.data.geonames.map((country) => ({
           value: country.countryCode,
-          label: country.countryName,
+          label: country.name,
           geonameId: country.geonameId,
         }));
         setCountryOptions(countries);
       })
       .catch((err) => console.error("Failed to fetch countries:", err));
-  }, [GEO_USERNAME]);
-
-  const handleCountryChange = (country) => {
-    setSelectedCountry(country);
-    setSelectedState(null);
-    setSelectedCity(null);
-    setCityOptions([]);
-    fetchStates(country.geonameId);
-    console.log("Selected Country:", country.label);
   };
 
-  const handleStateChange = (state) => {
-    setSelectedState(state);
-    setSelectedCity(null);
-    setCityOptions([]);
-    fetchCities(selectedCountry?.value, state?.value);
-    console.log("Selected State:", state.label);
-  };
-
-  const handleCityChange = (city) => {
-    setSelectedCity(city);
-    console.log("Selected City:", city.label);
-    console.log("City Latitude:", city.latitude);
-    console.log("City Longitude:", city.longitude);
-  };
-
-  const fetchStates = (countryId) => {
-    if (!countryId) return;
+  const fetchStates = (countryId, searchQuery = "") => {
+    if (!searchQuery) return;
 
     axios
-      .get(`https://secure.geonames.org/childrenJSON?geonameId=${countryId}&username=${GEO_USERNAME}`)
+      .get(
+        `https://secure.geonames.org/childrenJSON?geonameId=${countryId}&name_startsWith=${searchQuery}&username=${GEO_USERNAME}`
+      )
       .then((response) => {
         const states = response.data.geonames.map((state) => ({
           value: state.adminCode1,
@@ -82,12 +69,12 @@ function CityForm() {
       .catch((err) => console.error("Failed to fetch states:", err));
   };
 
-  const fetchCities = (countryCode, stateCode) => {
-    if (!countryCode || !stateCode) return;
+  const fetchCities = (countryCode, stateCode, searchQuery = "") => {
+    if (!searchQuery) return;
 
     axios
       .get(
-        `https://secure.geonames.org/searchJSON?country=${countryCode}&adminCode1=${stateCode}&featureClass=P&maxRows=10&username=${GEO_USERNAME}`
+        `https://secure.geonames.org/searchJSON?country=${countryCode}&adminCode1=${stateCode}&featureClass=P&maxRows=10&name_startsWith=${searchQuery}&username=${GEO_USERNAME}`
       )
       .then((response) => {
         const cities = response.data.geonames.map((city) => ({
@@ -102,21 +89,82 @@ function CityForm() {
       .catch((err) => console.error("Failed to fetch cities:", err));
   };
 
+  const handleCountrySelect = (country) => {
+    setSelectedCountry(country);
+    setCountrySearch(country.label);
+    setSelectedState(null);
+    setSelectedCity(null);
+    setStateOptions([]);
+    setCityOptions([]);
+  };
+
+  const handleStateSelect = (state) => {
+    setSelectedState(state);
+    setStateSearch(state.label);
+    setSelectedCity(null);
+    setCityOptions([]);
+  };
+
+  const handleCitySelect = (city) => {
+    setSelectedCity(city);
+    setCitySearch(city.label);
+  };
+
   const handleContinue = () => {
     if (!selectedCountry || !selectedState || !selectedCity) {
-        setError("Please select a country, state, and city.");
-        console.error("Error: Incomplete selection.");
-        return;
+      setError("Please select a country, state, and city.");
+      return;
     }
 
     const { latitude, longitude } = selectedCity;
 
-    // Navigate to NameForm with query parameters
     navigate(
-        `/sign/${signName}/name?day=${day}&month=${month}&decade=${decade}&year=${year}&hour=${hour}&minute=${minute}&period=${period}&latitude=${latitude}&longitude=${longitude}`
+      `/sign/${signName}/name?day=${day}&month=${month}&decade=${decade}&year=${year}&hour=${hour}&minute=${minute}&period=${period}&latitude=${latitude}&longitude=${longitude}`
     );
-};
+  };
 
+  const debouncedFetchCountries = useCallback(debounce(fetchCountries, 500), []);
+  const debouncedFetchStates = useCallback(
+    debounce((searchQuery) => {
+      if (selectedCountry) {
+        fetchStates(selectedCountry.geonameId, searchQuery);
+      }
+    }, 500),
+    [selectedCountry]
+  );
+
+  const debouncedFetchCities = useCallback(
+    debounce((searchQuery) => {
+      if (selectedCountry && selectedState) {
+        fetchCities(selectedCountry.value, selectedState.value, searchQuery);
+      }
+    }, 500),
+    [selectedCountry, selectedState]
+  );
+
+  useEffect(() => {
+    if (countrySearch.length > 0) {
+      debouncedFetchCountries(countrySearch);
+    } else {
+      setCountryOptions([]);
+    }
+  }, [countrySearch, debouncedFetchCountries]);
+
+  useEffect(() => {
+    if (stateSearch.length > 0) {
+      debouncedFetchStates(stateSearch);
+    } else {
+      setStateOptions([]);
+    }
+  }, [stateSearch, debouncedFetchStates]);
+
+  useEffect(() => {
+    if (citySearch.length > 0) {
+      debouncedFetchCities(citySearch);
+    } else {
+      setCityOptions([]);
+    }
+  }, [citySearch, debouncedFetchCities]);
 
   return (
     <div className="city-container">
@@ -125,37 +173,76 @@ function CityForm() {
       </p>
 
       <label htmlFor="country-select">Country</label>
-      <Select
+      <input
         id="country-select"
-        options={countryOptions}
-        onChange={handleCountryChange}
-        value={selectedCountry}
-        placeholder="Select Country"
+        type="text"
+        value={countrySearch}
+        onChange={(e) => setCountrySearch(e.target.value)}
+        placeholder="Type to search for a country"
       />
+      {countryOptions.length > 0 && countrySearch !== selectedCountry?.label && (
+        <ul className="dropdown">
+          {countryOptions.map((country) => (
+            <li
+              key={country.value}
+              onClick={() => handleCountrySelect(country)}
+              className="dropdown-item"
+            >
+              {country.label}
+            </li>
+          ))}
+        </ul>
+      )}
 
       {selectedCountry && (
         <>
           <label htmlFor="state-select">State</label>
-          <Select
+          <input
             id="state-select"
-            options={stateOptions}
-            onChange={handleStateChange}
-            value={selectedState}
-            placeholder="Select State"
+            type="text"
+            value={stateSearch}
+            onChange={(e) => setStateSearch(e.target.value)}
+            placeholder="Type to search for a state"
           />
+          {stateOptions.length > 0 && stateSearch !== selectedState?.label && (
+            <ul className="dropdown">
+              {stateOptions.map((state) => (
+                <li
+                  key={state.value}
+                  onClick={() => handleStateSelect(state)}
+                  className="dropdown-item"
+                >
+                  {state.label}
+                </li>
+              ))}
+            </ul>
+          )}
         </>
       )}
 
-      {selectedState && cityOptions.length > 0 && (
+      {selectedState && (
         <>
           <label htmlFor="city-select">City</label>
-          <Select
+          <input
             id="city-select"
-            options={cityOptions}
-            onChange={handleCityChange}
-            value={selectedCity}
-            placeholder="Select City"
+            type="text"
+            value={citySearch}
+            onChange={(e) => setCitySearch(e.target.value)}
+            placeholder="Type to search for a city"
           />
+          {cityOptions.length > 0 && citySearch !== selectedCity?.label && (
+            <ul className="dropdown">
+              {cityOptions.map((city) => (
+                <li
+                  key={city.value}
+                  onClick={() => handleCitySelect(city)}
+                  className="dropdown-item"
+                >
+                  {city.label}
+                </li>
+              ))}
+            </ul>
+          )}
         </>
       )}
 

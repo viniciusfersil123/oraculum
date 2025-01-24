@@ -166,3 +166,52 @@
   background-color: #ffffff;
   /* Sets a white background for readability */
 }
+
+/* ========== Dropdown Styling ========== */
+.dropdown {
+  width: 100%;
+  max-width: 400px;
+  margin: 5px 0;
+  padding: 0;
+  list-style: none;
+  background-color: #2c2c50;
+  border: 2px solid #fecd1a;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+  overflow-y: auto;
+  max-height: 200px;
+  z-index: 1000; /* Ensures dropdown appears above other elements */
+}
+
+.dropdown-item {
+  padding: 10px;
+  font-size: 1.1rem;
+  color: #fecd1a;
+  cursor: pointer;
+  border-bottom: 1px solid rgba(254, 205, 26, 0.2);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.dropdown-item:last-child {
+  border-bottom: none; /* Remove border for the last item */
+}
+
+.dropdown-item:hover {
+  background-color: #fecd1a;
+  color: #2c2c50;
+  font-weight: bold;
+}
+
+/* Scrollbar Styling */
+.dropdown::-webkit-scrollbar {
+  width: 8px;
+}
+
+.dropdown::-webkit-scrollbar-thumb {
+  background-color: #fecd1a;
+  border-radius: 4px;
+}
+
+.dropdown::-webkit-scrollbar-thumb:hover {
+  background-color: #ffffff;
+}
